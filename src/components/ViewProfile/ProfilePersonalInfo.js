@@ -1,18 +1,11 @@
-import React,{ useEffect } from 'react';
-import profilepic from "./../assets/img/profile.jpg";
+import React from 'react';
+import profilepic from "./../../assets/img/profile.jpg";
 import { Col } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
-import { userPersonalInfo } from "./../actions/userActions";
+import { useSelector } from "react-redux";
 
 const ProfilePersonalInfo = () => {
-    //Dispatch
-    const dispatch = useDispatch();
-    useEffect(() => {
-        const loadUser = () => dispatch(userPersonalInfo());
-        loadUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps    
-    }, []);
-    const { name, lastname, title, email } = useSelector(state => state.user.user);
+
+    const { name, lastname, title, email } = useSelector(state => state.view.profile);
     return (
         <Col>
             <Col className="d-flex my-4">              

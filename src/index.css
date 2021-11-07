@@ -55,12 +55,37 @@ body{
 .card-header{
   background-color: rgba(0,0,0,.15)!important;;
 }
-
 .card-body > .col{
   background-color: rgba(0,0,0,.05)!important;
 }
-
 .card-body .col p{
   margin: 0px;
   font-size: 1.1rem;
+}
+
+/**About**/
+.about{
+  background-color: rgba(0,0,0,.05)!important
+}
+
+/**Courses**/
+.courses{
+  text-decoration: none;
+  color: white;
+}
+.courses:hover{
+  color: #52151a;
+}
+
+/**Stack**/
+
+.single-stack{
+  border-color: rgba(0,0,0,.05)!important;
+  border: 4px solid;
+}
+.stack-img{
+  transition: all 0.5s ease-out;
+}
+.stack-img:hover {
+  filter: invert(100%);
 }

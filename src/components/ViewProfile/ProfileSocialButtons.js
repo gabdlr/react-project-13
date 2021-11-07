@@ -3,7 +3,7 @@ import { Col, Button } from "react-bootstrap";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 const ProfileSocialButtons = (props) => {
     const handleClick = (url) => {
-        window.open(url,'_blank');
+        window.open(url,'_blank','noopener noreferrer');
     }
 
     const { linkedin_url, github_url, twitter_url } = props;

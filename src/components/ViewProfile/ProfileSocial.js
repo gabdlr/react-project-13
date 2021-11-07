@@ -1,20 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Col, Row } from "react-bootstrap";
 import ProfileSocialButtons from './ProfileSocialButtons';
 //Redux
-import { useSelector, useDispatch } from "react-redux";
-import { userSocialInfo } from "./../actions/userActions";
-
+import { useSelector } from "react-redux";
 
 const ProfileSocial = () => {
 
-    const dispatch = useDispatch();
-    useEffect( () => {
-        const loadSocial = () => dispatch(userSocialInfo());
-        loadSocial();
-    // eslint-disable-next-line react-hooks/exhaustive-deps    
-    },[])
-    const social = useSelector( state => state.user.social);
+    const social = useSelector( state => state.view.profile.social);
     return (
             <Col className="mb-md-5">
                 <Col className="mb-2">

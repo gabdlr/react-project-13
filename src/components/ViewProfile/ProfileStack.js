@@ -1,18 +1,10 @@
-import React,{ useEffect } from 'react';
+import React from 'react';
 import { Col } from "react-bootstrap";
 //Redux
-import { useSelector, useDispatch } from "react-redux";
-import { userStackInfo } from "./../actions/userActions";
+import { useSelector } from "react-redux";
 import ProfileStackSingle from './ProfileStackSingle';
 const ProfileStack = () => {
-
-    const dispatch = useDispatch();
-    useEffect(() => {
-        const loadStack = () => dispatch(userStackInfo());
-        loadStack();        
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-    const stack = useSelector(state => state.user.stack);
+    const stack = useSelector(state => state.view.profile.stack);
     return (
         <Col>
             <h5 className="text-light">Proficency</h5>

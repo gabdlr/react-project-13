@@ -1,22 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Card } from 'react-bootstrap';
 import MainEducationItem from './MainEducationItem';
 //Redux
-import { useSelector, useDispatch } from "react-redux";
-import { userEducationInfo } from "./../actions/userActions";
+import { useSelector } from "react-redux";
 
 const MainEducationSection = () => {
 
-    const dispatch = useDispatch();
-    useEffect(() => {
-        const loadEducation = () => dispatch(userEducationInfo());
-        loadEducation();
-    // eslint-disable-next-line react-hooks/exhaustive-deps    
-    }, []);
-    const education = useSelector( state => state.user.education);
+    const education = useSelector( state => state.view.profile.education);
     if (education) {
         return(
-            <Card className="bg-card">
+            <Card id="education" className="bg-card mt-4">
             <Card.Header><h2 className="my-0 text-white">Education</h2></Card.Header>
             {education.map(element => 
                 <MainEducationItem
