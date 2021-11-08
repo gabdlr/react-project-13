@@ -13,7 +13,7 @@ const MainEducationSection = () => {
             <Card.Header><h2 className="my-0 text-white">Education</h2></Card.Header>
             {education.map(element => 
                 <MainEducationItem
-                key={element.id}
+                key={element._id}
                 institution={element.institution}
                 degree={element.degree}
                 state={element.state}

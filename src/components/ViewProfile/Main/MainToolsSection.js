@@ -16,7 +16,7 @@ const MainToolsSection = () => {
             <Row className="ps-sm-5 justify-content-center justify-content-sm-start">
                 {tools.map(tool =>
                     <MainToolsItem
-                    key={tool.id}
+                    key={tool._id}
                     technology={tool.technology}
                     img_url={tool.img_url}
                     />

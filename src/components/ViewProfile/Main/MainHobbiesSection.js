@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 const MainHobbiesSection = () => { 
     const hobbie = useSelector(state => state.view.profile.hobbies);
-    const { content } = hobbie;
     return ( 
         <Card id="hobbies" className="bg-card mt-5">
             <Card.Header>
@@ -13,7 +12,7 @@ const MainHobbiesSection = () => {
             </Card.Header>
             <Card.Body>
                 <Col>
-                    <p className="p-3 ps-5 text-white main-desc">{content}</p>
+                    <p className="p-3 ps-5 text-white main-desc">{hobbie}</p>
                 </Col>
             </Card.Body>
         </Card> 

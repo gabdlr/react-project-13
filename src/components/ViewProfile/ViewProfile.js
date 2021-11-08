@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react'
 import { Row, Col } from "react-bootstrap";
 //Sidebar
-import ProfilePersonalInfo from "./ProfilePersonalInfo";
-import ProfileStack from "./ProfileStack";
-import ProfileSocial from "./ProfileSocial";
+import ProfilePersonalInfo from "./SideBar/ProfilePersonalInfo";
+import ProfileStack from "./SideBar/ProfileStack";
+import ProfileSocial from "./SideBar/ProfileSocial";
 //Main
-import NavBar from './NavBar';
-import MainEducationSection from "./MainEducationSection";
-import MainEmploymentSection from "./MainEmploymentSection";
-import MainCoursesSection from "./MainCoursesSection";
-import MainStackSection from "./MainStackSection";
-import MainToolsSection from "./MainToolsSection";
-import MainHobbiesSection from "./MainHobbiesSection";
-import MainAboutSection from './MainAboutSection';
+import NavBar from './Main/NavBar';
+import MainEducationSection from "./Main/MainEducationSection";
+import MainEmploymentSection from "./Main/MainEmploymentSection";
+import MainCoursesSection from "./Main/MainCoursesSection";
+import MainStackSection from "./Main/MainStackSection";
+import MainToolsSection from "./Main/MainToolsSection";
+import MainHobbiesSection from "./Main/MainHobbiesSection";
+import MainAboutSection from './Main/MainAboutSection';
 //Redux
 import { useDispatch } from 'react-redux';
 import { profileInfo } from '../../actions/profileActions'

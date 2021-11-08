@@ -10,7 +10,7 @@ const ProfileStack = () => {
             <h5 className="text-light">Proficency</h5>
             {stack.map(technology =>
                 <ProfileStackSingle
-                    key={technology.id}
+                    key={technology._id}
                     technology={technology.technology}
                     expertise={technology.expertise}
                 />

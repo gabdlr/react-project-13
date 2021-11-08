@@ -13,7 +13,7 @@ const MainStackSection = () => {
             <Row className="ps-sm-5 justify-content-center justify-content-sm-start">
                 {stack.map(technology =>
                     <MainStackItem
-                    key={technology.id}
+                    key={technology._id}
                     technology={technology.technology}
                     img_url={technology.img_url}
                     />

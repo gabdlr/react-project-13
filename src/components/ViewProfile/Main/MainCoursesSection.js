@@ -13,7 +13,7 @@ const MainCoursesSection = () => {
         <Card.Header><h2 className="my-0 text-white">Certifications</h2></Card.Header>
         {courses.map(course => 
             <MainCoursesItem
-            key={course.id}
+            key={course._id}
             title={course.title}
             url={course.url}
             institution={course.institution}

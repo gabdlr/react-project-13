@@ -16,7 +16,7 @@ const initialState = {
         jobs: [],
         courses: [],
         tools: [],
-        hobbies: {},
+        hobbies: "",
     },
     loading: false,
     error: null

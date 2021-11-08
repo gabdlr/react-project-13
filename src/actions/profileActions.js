@@ -24,8 +24,8 @@ export function profileInfo() {
     return async (dispatch) => {
         dispatch(getProfileInfo());
         try {
-            const response = await axiosClient.get('/profile');
-            dispatch(getProfileInfoSuccess(response.data));
+            const response = await axiosClient.get('https://gabresumeapp.herokuapp.com/api/v1/profile/61884778ba53dbaa421ed744');
+            dispatch(getProfileInfoSuccess(response.data)); 
         } catch (error) {
             console.log(error);
             dispatch(getProfileFailure(true));

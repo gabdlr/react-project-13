@@ -14,7 +14,7 @@ const MainEmploymentSection = () => {
             <Card.Header><h2 className="my-0 text-white">Employment History</h2></Card.Header>
             {jobs.map(job => 
                 <MainEmploymentItem
-                key={job.id}
+                key={job._id}
                 role={job.role}
                 company={job.company}
                 period_start={job.period_start}
