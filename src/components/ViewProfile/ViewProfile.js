@@ -27,7 +27,7 @@ const ViewProfile = () => {
     const loading = useSelector(state => state.view.loading);
     return (
     <div className="container-lg container-fluid">
-      {loading? (<div class="git">Loading...</div> ): 
+      {loading? (<div class="loader"></div> ): 
         <Row>
           <Col md={ 3 } className="bg-primary">
                 <Row className="flex-column">
