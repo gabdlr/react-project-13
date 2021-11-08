@@ -14,7 +14,7 @@ import MainToolsSection from "./Main/MainToolsSection";
 import MainHobbiesSection from "./Main/MainHobbiesSection";
 import MainAboutSection from './Main/MainAboutSection';
 //Redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { profileInfo } from '../../actions/profileActions'
 
 const ViewProfile = () => {
@@ -24,8 +24,10 @@ const ViewProfile = () => {
         loadUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps    
     }, []);
-    return ( 
+    const loading = useSelector(state => state.view.loading);
+    return (
     <div className="container-lg container-fluid">
+      {loading? (<div class="git">Loading...</div> ): 
         <Row>
           <Col md={ 3 } className="bg-primary">
                 <Row className="flex-column">
@@ -44,7 +46,7 @@ const ViewProfile = () => {
               <MainToolsSection/>
               <MainHobbiesSection/>
             </Col>
-        </Row>
+        </Row>}
     </div> );
 }
  

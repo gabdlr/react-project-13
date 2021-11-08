@@ -12,11 +12,11 @@ const getProfileInfo = () => ({
 });
 const getProfileInfoSuccess = user => ({
     type: GET_PROFILE_SUCCESS,
-    payload: user
+    payload: user,
 });
 const getProfileFailure = state => ({
     type: GET_PROFILE_FAILED,
-    payload: state
+    payload: state,
 });
 
 //User personal info

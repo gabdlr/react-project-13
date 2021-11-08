@@ -33,12 +33,14 @@ export default function (state = initialState, action) {
             return ({
                 ...state,
                 profile: action.payload,
+                loading: false,
                 error: false
             });       
         case GET_PROFILE_FAILED:            
             return ({
                 ...state,
-                error: action.payload
+                error: action.payload,
+                loading: false
             });
         default:
             return state;
