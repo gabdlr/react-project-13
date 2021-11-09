@@ -1,5 +1,5 @@
 import React, { useEffect, Fragment } from 'react'
-import { Row, Col, Navbar, Container } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import Header from '../Header';
 //Sidebar
 import ProfilePersonalInfo from "./SideBar/ProfilePersonalInfo";
@@ -23,10 +23,13 @@ const ViewProfile = () => {
     useEffect(() => {
         const loadUser = () => dispatch(profileInfo());
         loadUser();
+        const token = localStorage.getItem('token');
         //If user has token, token is set in header by the authToken fn,
         //and authentication is triggered
-        const authenticate = () => dispatch(getAuthenticatedUser());
-        authenticate();
+        if(token){
+          const authenticate = () => dispatch(getAuthenticatedUser());
+          authenticate();
+        }
     // eslint-disable-next-line react-hooks/exhaustive-deps    
     }, []);
     const loading = useSelector(state => state.view.loading);

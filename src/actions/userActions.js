@@ -7,7 +7,8 @@ import {
     GET_AUTHENTICATED_USER_FAILED,
     CREATE_USER,
     CREATE_USER_SUCCESS,
-    CREATE_USER_FAILED
+    CREATE_USER_FAILED,
+    USER_LOGOUT
 } from '../types';
 import axiosClient from "../config/axiosClient";
 import authToken from '../config/authToken';
@@ -60,9 +61,12 @@ const createUserSuccess = userData => ({
 const createUserFailure = state => ({
     type: CREATE_USER_FAILED,
     payload: state
-})
+});
+const userLogOut = () => ({
+    type: USER_LOGOUT
+});
 
-
+//User authentication
 export function authenticate(userData) {
     return async (dispatch) => {
         dispatch(authUser());
@@ -72,14 +76,14 @@ export function authenticate(userData) {
         } catch (error) {
             if (error.response) {
                 // Request made and server responded
-                console.log(error.response.data);
-                console.log(error.response.status);
+                // console.log(error.response.data);
+                // console.log(error.response.status);
               } else if (error.request) {
                 // The request was made but no response was received
-                console.log(error.request);
+                // console.log(error.request);
               } else {
                 // Something happened in setting up the request that triggered an Error
-                console.log('Error', error.message);
+                // console.log('Error', error.message);
               }
             dispatch(authUserFailure(true));
         }
@@ -102,19 +106,26 @@ export function getAuthenticatedUser() {
         } catch (error) {
             if (error.response) {
                 // Request made and server responded
-                console.log(error.response.data);
-                console.log(error.response.status);
+                // console.log(error.response.data);
+                // console.log(error.response.status);
               } else if (error.request) {
                 // The request was made but no response was received
-                console.log(error.request);
+                // console.log(error.request);
               } else {
                 // Something happened in setting up the request that triggered an Error
-                console.log('Error', error.message);
+                // console.log('Error', error.message);
               }
             dispatch(getAuthUserFailure(true));  
         }
     }
 }
+
+//Logout function which I think can't virtually fail
+export function logout() {
+    return (dispatch) => {
+        dispatch(userLogOut());
+    }
+} 
 
 //New user registration
 export function createNewUser(userData){
@@ -126,14 +137,14 @@ export function createNewUser(userData){
        } catch (error) {
         if (error.response) {
             // Request made and server responded
-            console.log(error.response.data);
-            console.log(error.response.status);
+            // console.log(error.response.data);
+            // console.log(error.response.status);
         } else if (error.request) {
             // The request was made but no response was received
-            console.log(error.request);
+            // console.log(error.request);
         } else {
             // Something happened in setting up the request that triggered an Error
-            console.log('Error', error.message);
+            // console.log('Error', error.message);
         }
         dispatch(createUserFailure(true));  
        } 

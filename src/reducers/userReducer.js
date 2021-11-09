@@ -9,7 +9,8 @@ import {
     GET_AUTHENTICATED_USER_FAILED,
     CREATE_USER,
     CREATE_USER_SUCCESS,
-    CREATE_USER_FAILED
+    CREATE_USER_FAILED,
+    USER_LOGOUT
 } from '../types';
 
 const initialState = {
@@ -49,12 +50,22 @@ export default function (state = initialState, action) {
             }  
         case USER_AUTH_FAILED:
         case GET_AUTHENTICATED_USER_FAILED:
-        case CREATE_USER_FAILED:    
+            localStorage.removeItem('token')    
             return{
                 ...state,
                 error: action.payload,
                 loading: false
-            }        
+            }
+        case CREATE_USER_FAILED:
+            return{
+                ...state,
+                error: action.payload,
+                loading: false
+            }
+        case USER_LOGOUT:
+            localStorage.removeItem('token');
+            //Forgive me for my sins 🤦‍♂️
+            return initialState;
         default:
             return state;
     }
