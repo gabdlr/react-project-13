@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
-import { Row, Col } from "react-bootstrap";
+import React, { useEffect, Fragment } from 'react'
+import { Row, Col, Navbar, Container } from "react-bootstrap";
+import Header from '../Header';
 //Sidebar
 import ProfilePersonalInfo from "./SideBar/ProfilePersonalInfo";
 import ProfileStack from "./SideBar/ProfileStack";
@@ -16,19 +17,25 @@ import MainAboutSection from './Main/MainAboutSection';
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { profileInfo } from '../../actions/profileActions'
-
+import { getAuthenticatedUser } from '../../actions/userActions'
 const ViewProfile = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         const loadUser = () => dispatch(profileInfo());
         loadUser();
+        //If user has token, token is set in header by the authToken fn,
+        //and authentication is triggered
+        const authenticate = () => dispatch(getAuthenticatedUser());
+        authenticate();
     // eslint-disable-next-line react-hooks/exhaustive-deps    
     }, []);
     const loading = useSelector(state => state.view.loading);
     return (
-    <div className="container-lg container-fluid">
-      {loading? (<div class="loader"></div> ): 
-        <Row>
+    <div className="container-lg container-fluid pt-5">
+      {loading? (<div className="loader"></div> ):
+      <Fragment>
+        <Header/>
+        <Row className="mt-md-3">
           <Col md={ 3 } className="bg-primary">
                 <Row className="flex-column">
                   <ProfilePersonalInfo/>
@@ -46,7 +53,8 @@ const ViewProfile = () => {
               <MainToolsSection/>
               <MainHobbiesSection/>
             </Col>
-        </Row>}
+        </Row>
+      </Fragment> }
     </div> );
 }
  

@@ -1,19 +1,32 @@
-//Components
-import ViewProfile from "./components/ViewProfile/ViewProfile";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import authToken from "./config/authToken";
+//Components
+//Profile view
+import ViewProfile from "./components/ViewProfile/ViewProfile";
+//Users
+import UsersLayout from "./components/Users/UsersLayout";
+import Login from "./components/Users";
+import Register from "./components/Users/Register";
 //Redux
 import { Provider } from "react-redux";
 import store from "./store"; 
-import Login from "./components/Users/Login";
-function App() {
-  
+
+//Search for token
+const token = localStorage.getItem('token');
+if(token){
+  authToken(token);
+}
+function App() { 
   return (
     <div className="App">
       <Provider store={store}>
         <Router>
           <Routes> 
             <Route path="/" element={<ViewProfile/>}/>
-            <Route path="/Login" element={<Login/>}/> 
+            <Route path="Users" element={<UsersLayout/>}>
+              <Route index element={<Login/>}/>
+              <Route path="Register" element={<Register/>}/>
+            </Route>
           </Routes>
         </Router>
       </Provider>
