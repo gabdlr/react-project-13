@@ -1,0 +1,34 @@
+.register{
+    color: rgba(253, 253, 253, 0.75)!important;
+    font-size: 1.2rem;
+}
+.btn-outline-primary{
+    transition: all 0.5s ease-in-out;
+    box-shadow: unset;
+}
+.btn-outline-primary:hover{
+    background-color: rgba( 0, 0, 0, 0.25);
+    border-color: #ffffff;
+}
+.btn-outline-primary:focus {
+    box-shadow: unset;
+}
+
+.register:hover{
+    color: rgba(253, 253, 253, 1)!important;
+}
+.btn-outline-danger:hover{
+    background-color: rgba( 0, 0, 0, 0.25);
+    border-color: #ffffff;
+}
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem #0e6666;
+}
+.login-container {
+    max-width: 600px;
+}
+.login {
+    -webkit-box-shadow: 4px 10px 12px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 10px 12px -1px rgba(0,0,0,0.75);
+    box-shadow: 4px 10px 12px -1px rgba(0,0,0,0.75);
+}

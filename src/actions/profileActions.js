@@ -19,7 +19,7 @@ const getProfileFailure = state => ({
     payload: state,
 });
 
-//User personal info
+//Profile info
 export function profileInfo() {
     return async (dispatch) => {
         dispatch(getProfileInfo());
