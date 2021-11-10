@@ -31,5 +31,5 @@ const ResumeSection = () => {
         </Container>
      );
 }
- 
+
 export default ResumeSection;
