@@ -7,6 +7,7 @@ import ViewProfile from "./components/ViewProfile/ViewProfile";
 import UsersLayout from "./components/Users/UsersLayout";
 import Login from "./components/Users";
 import Register from "./components/Users/Register";
+import EditProfile from "./components/Users/EditProfile";
 //Redux
 import { Provider } from "react-redux";
 import store from "./store"; 
@@ -27,6 +28,7 @@ function App() {
               <Route index element={<Login/>}/>
               <Route path="Register" element={<Register/>}/>
             </Route>
+            <Route path="Users/EditProfile" element={<EditProfile/>}/>
           </Routes>
         </Router>
       </Provider>

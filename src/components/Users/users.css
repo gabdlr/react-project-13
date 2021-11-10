@@ -1,8 +1,10 @@
+/**Register and login**/
 .register{
     color: rgba(253, 253, 253, 0.75)!important;
     font-size: 1.2rem;
 }
-.btn-outline-primary{
+.btn-outline-primary,
+.btn-outline-danger{
     transition: all 0.5s ease-in-out;
     box-shadow: unset;
 }
@@ -24,6 +26,11 @@
 .form-control:focus {
     box-shadow: 0 0 0 0.25rem #0e6666;
 }
+
+.form-control:focus.red{
+    box-shadow: 0 0 0 0.25rem #990808;
+}
+
 .user-container {
     max-width: 600px;
 }
@@ -32,3 +39,45 @@
     -moz-box-shadow: 4px 10px 12px -1px rgba(0,0,0,0.75);
     box-shadow: 4px 10px 12px -1px rgba(0,0,0,0.75);
 }
+
+/**Profile editor**/
+
+.picture {
+    max-width:200px;
+    max-height:200px;
+    border-radius: 50%;
+}
+
+/* .picture-edit {
+    position: relative;
+} */
+.picture-edit > input {
+    display: none;
+  }
+.picture-edit img{
+    transition: all 0.5s ease-in-out;
+}
+.picture-edit img:hover {
+    cursor: pointer;
+    filter: grayscale(1);
+}
+/* .edit-picture {
+    position: absolute;
+    z-index: 999;
+    top: 40%;
+    right:40%;
+    opacity: 0;
+} */
+.edit-picture:hover {
+    opacity: 1;
+}
+
+.bg-modal-profile{
+    background-color: #6e1b22;
+}
+.modal-content{
+    background-color: unset;
+}
+.social.btn.btn:focus{
+    box-shadow: 0 0 0 0.25rem rgb(178 216 216 / 25%)!important;
+  }

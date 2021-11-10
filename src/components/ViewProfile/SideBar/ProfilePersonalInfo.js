@@ -8,7 +8,7 @@ const ProfilePersonalInfo = () => {
     return (
         <Col>
             <Col className="d-flex my-4">              
-                    <img src={picture} className="profile-pic" alt="" />
+                    <img src={picture} className="profile-pic profile-view" alt="" />
             </Col>
             <Col className="description">
                 <h5 className="text-light">Personal information</h5>
