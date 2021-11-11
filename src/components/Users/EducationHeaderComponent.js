@@ -26,44 +26,44 @@ const EducationHeaderComponent = () => {
                 <Row className="pb-3">
                     <Col>
                         <Form className="mt-md-5 ps-md-5">
-                            <Form.Group as={Row} className="mb-md-4 mb-3" controlId="formPlaintextLinkedin">
-                                <Form.Label column sm="2" className="text-md-center text-white ps-md-0">
+                            <Form.Group as={Row} className="mb-md-4 mb-3" controlId="formPlaintextInstitution">
+                                <Form.Label column sm="2" className="text-end text-white ps-md-0">
                                 Institution
                                 </Form.Label>
                                 <Col sm="8">
-                                <Form.Control className="red" name="linkedin" type="text" placeholder="LinkedIn URL" />
+                                <Form.Control className="red" name="institution" type="text" placeholder="Institution" />
                                 </Col>
                             </Form.Group>
-                            <Form.Group as={Row} className="mb-md-4 mb-3" controlId="formPlaintextGithub">
-                                <Form.Label column sm="2" className="text-md-center text-white ps-md-0">
+                            <Form.Group as={Row} className="mb-md-4 mb-3" controlId="formPlaintextDegree">
+                                <Form.Label column sm="2" className="text-end text-white ps-md-0">
                                 Degree
                                 </Form.Label>
                                 <Col sm="8">
-                                <Form.Control className="red" name="github" type="text" placeholder="GitHub URL" />
+                                <Form.Control className="red" name="degree" type="text" placeholder="Degree" />
                                 </Col>
                             </Form.Group>
-                            <Form.Group as={Row} className="mb-3" controlId="formPlaintextTwitter">
-                                <Form.Label name="twitter" column sm="2" className="text-md-center text-white ps-md-0">
+                            <Form.Group as={Row} className="mb-3" controlId="formPlaintextStatus">
+                                <Form.Label column sm="2" className="text-end text-white ps-md-0">
                                 Status
                                 </Form.Label>
                                 <Col sm="8">
-                                <Form.Control className="red" type="text" placeholder="Twitter URL" />
+                                <Form.Control name="state" className="red" type="text" placeholder="Status" />
                                 </Col>
                             </Form.Group>
-                            <Form.Group as={Row} className="mb-3" controlId="formPlaintextTwitter">
-                                <Form.Label name="twitter" column sm="2" className="text-md-center text-white ps-md-0">
+                            <Form.Group as={Row} className="mb-3" controlId="formPlaintextStartdate">
+                                <Form.Label column sm="2" className="text-end text-white ps-md-0">
                                 Start date
                                 </Form.Label>
                                 <Col sm="8">
-                                <Form.Control className="red" type="date"/>
+                                <Form.Control name="period_start" className="red" type="date"/>
                                 </Col>
                             </Form.Group>
-                            <Form.Group as={Row} className="mb-3" controlId="formPlaintextTwitter">
-                                <Form.Label name="twitter" column sm="2" className="text-md-center text-white ps-md-0">
+                            <Form.Group as={Row} className="mb-3" controlId="formPlaintextFisnishdate">
+                                <Form.Label column sm="2" className="text-end text-white ps-md-0">
                                 Finish date
                                 </Form.Label>
                                 <Col sm="8">
-                                <Form.Control className="red" type="date"/>
+                                <Form.Control name="period_end" className="red" type="date"/>
                                 </Col>
                             </Form.Group>
                             <Row className="py-2">

@@ -27,35 +27,35 @@ const EmploymentHeaderComponent = () => {
                     <Col>
                         <Form className="mt-md-5 ps-md-5">
                             <Form.Group as={Row} className="mb-md-4 mb-3" controlId="formPlaintextPosition">
-                                <Form.Label column sm="2" className="text-md-center text-white ps-md-0">
+                                <Form.Label column sm="2" className="text-end text-white ps-md-0">
                                 Position
                                 </Form.Label>
                                 <Col sm="8">
-                                <Form.Control className="red" name="linkedin" type="text" placeholder="Position" />
+                                <Form.Control className="red" name="role" type="text" placeholder="Position" />
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row} className="mb-md-4 mb-3" controlId="formPlaintextCompany">
-                                <Form.Label column sm="2" className="text-md-center text-white ps-md-0">
+                                <Form.Label column sm="2" className="text-end text-white ps-md-0">
                                 Company
                                 </Form.Label>
                                 <Col sm="8">
-                                <Form.Control className="red" name="github" type="text" placeholder="Company" />
+                                <Form.Control className="red" name="company" type="text" placeholder="Company" />
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextTwitter">
-                                <Form.Label name="twitter" column sm="2" className="text-md-center text-white ps-md-0">
+                                <Form.Label column sm="2" className="text-end text-white ps-md-0">
                                 Start date
                                 </Form.Label>
                                 <Col sm="8">
-                                <Form.Control className="red" type="date"/>
+                                <Form.Control name="period_start" className="red" type="date"/>
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row} className="mb-3" controlId="formPlaintextTwitter">
-                                <Form.Label name="twitter" column sm="2" className="text-md-center text-white ps-md-0">
+                                <Form.Label column sm="2" className="text-end text-white ps-md-0">
                                 Finish date
                                 </Form.Label>
                                 <Col sm="8">
-                                <Form.Control className="red" type="date"/>
+                                <Form.Control name="period_end" className="red" type="date"/>
                                 </Col>
                             </Form.Group>
                             <Row className="py-2">

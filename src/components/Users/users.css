@@ -30,7 +30,9 @@
 .form-control:focus.red{
     box-shadow: 0 0 0 0.25rem #990808;
 }
-
+.form-select:focus.red{
+    box-shadow: 0 0 0 0.25rem #990808;
+}
 .user-container {
     max-width: 600px;
 }
@@ -41,16 +43,12 @@
 }
 
 /**Profile editor**/
-
+/**Profile picture**/
 .picture {
     max-width:200px;
     max-height:200px;
     border-radius: 50%;
 }
-
-/* .picture-edit {
-    position: relative;
-} */
 .picture-edit > input {
     display: none;
   }
@@ -61,17 +59,28 @@
     cursor: pointer;
     filter: grayscale(1);
 }
-/* .edit-picture {
-    position: absolute;
-    z-index: 999;
-    top: 40%;
-    right:40%;
-    opacity: 0;
-} */
 .edit-picture:hover {
     opacity: 1;
 }
 
+/**Sections**/
+.card-header button:hover {
+    filter: invert(100%);
+}
+
+.card-body button:hover {
+    filter: invert(100%);
+}
+.btn-close:focus{
+    box-shadow: unset;
+}
+.btn:focus{
+    box-shadow: unset;
+}
+button:focus{
+    box-shadow: unset;
+}
+/**Modal**/
 .bg-modal-profile{
     background-color: #6e1b22;
 }
@@ -80,4 +89,4 @@
 }
 .social.btn.btn:focus{
     box-shadow: 0 0 0 0.25rem rgb(178 216 216 / 25%)!important;
-  }
+}

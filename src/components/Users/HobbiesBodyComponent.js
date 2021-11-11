@@ -5,7 +5,7 @@ const HobbiesBodyComponent = () => {
         <Card.Body>
             <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                <Form.Label className="text-white">Short description about you</Form.Label>
+                <Form.Label className="text-white">Share your hobbies and interests</Form.Label>
                 <Form.Control as="textarea" rows={2} className="red" />
             </Form.Group>
                 <Row className="py-2">

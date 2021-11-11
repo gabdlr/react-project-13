@@ -8,6 +8,7 @@ import CoursesHeaderComponent from './CoursesHeaderComponent';
 import CoursesBodyComponent from './CoursesBodyComponent';
 import HobbiesHeaderComponent from './HobbiesHeaderComponent';
 import HobbiesBodyComponent from './HobbiesBodyComponent';
+import SkillsHeaderComponents from './SkillsHeaderComponent';
 const ResumeSection = () => {
     return ( 
         <Container className="bg-secondary mt-3 pt-3">
@@ -25,8 +26,11 @@ const ResumeSection = () => {
                 <CoursesBodyComponent/>
             </Card>
             <Card className="bg-card mt-4">
-            <HobbiesHeaderComponent/>
-            <HobbiesBodyComponent/>
+                <SkillsHeaderComponents/>
+            </Card>
+            <Card className="bg-card mt-4">
+                <HobbiesHeaderComponent/>
+                <HobbiesBodyComponent/>
             </Card>
         </Container>
      );

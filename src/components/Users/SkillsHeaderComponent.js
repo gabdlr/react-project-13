@@ -1,8 +1,9 @@
-import React,{ Fragment, useState } from 'react';
+import React, {Fragment, useState } from 'react'
 import { Row, Col, Form, Card, Button, Modal } from 'react-bootstrap';
 
-const CoursesHeaderComponent = () => {
-    //Bootstrap's modal
+const SkillsHeaderComponents = () => {
+
+     //Bootstrap's modal
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -11,7 +12,7 @@ const CoursesHeaderComponent = () => {
         <Card.Header>
             <Row>
                 <Col className="d-flex justify-content-between">
-                <h2 className="mb-0 text-white align-self-center">Certifications</h2>
+                <h2 className="mb-0 text-white align-self-center">Skills</h2>
                 <Button variant="transparent" onClick={ handleShow }>
                         <i className="bi bi-plus-circle" style={{ fontSize: 30, color: 'white' }}></i>
                 </Button>
@@ -20,42 +21,37 @@ const CoursesHeaderComponent = () => {
         </Card.Header>
         <Modal centered size="lg" className="box" show={show} onHide={handleClose}>
             <Modal.Header className="bg-secondary" closeButton>
-                <Modal.Title className="text-white"> New certificate</Modal.Title>
+                <Modal.Title className="text-white" > New skill registry</Modal.Title>
             </Modal.Header>
             <Modal.Body className="bg-modal-profile" >
                 <Row className="pb-3">
                     <Col>
                         <Form className="mt-md-5 ps-md-5">
-                            <Form.Group as={Row} className="mb-md-4 mb-3" controlId="formPlaintextInstitution">
+                            <Form.Group as={Row} className="mb-md-4 mb-3" controlId="formPlaintextSkill">
                                 <Form.Label column sm="2" className="text-end text-white ps-md-0">
-                                Institution
+                                Skill
                                 </Form.Label>
                                 <Col sm="8">
-                                <Form.Control className="red" name="institution" type="text" placeholder="Institution" />
+                                <Form.Control className="red" name="technology" type="text" placeholder="Skill" />
                                 </Col>
                             </Form.Group>
-                            <Form.Group as={Row} className="mb-md-4 mb-3" controlId="formPlaintextTitle">
+                            <Form.Group as={Row} >
                                 <Form.Label column sm="2" className="text-end text-white ps-md-0">
-                                Title
+                                Proficency
                                 </Form.Label>
-                                <Col sm="8">
-                                <Form.Control className="red" name="title" type="text" placeholder="Certificate title" />
-                                </Col>
-                            </Form.Group>
-                            <Form.Group as={Row} className="mb-3" controlId="formPlaintextTwitter">
-                                <Form.Label name="twitter" column sm="2" className="text-end text-white ps-md-0">
-                                Url
-                                </Form.Label>
-                                <Col sm="8">
-                                <Form.Control name="url" className="red" type="text" placeholder="Certificate URL" />
-                                </Col>
-                            </Form.Group>
-                            <Form.Group as={Row} className="mb-3" controlId="formPlaintextIssued">
-                                <Form.Label name="twitter" column sm="2" className="text-end text-white ps-md-0">
-                                Issued on
-                                </Form.Label>
-                                <Col sm="8">
-                                <Form.Control name="date" className="red" type="date"/>
+                                <Col sm="2">
+                                    <Form.Select className="red" name="expertise" aria-label="Expertise">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </Form.Select>
                                 </Col>
                             </Form.Group>
                             <Row className="py-2">
@@ -73,4 +69,4 @@ const CoursesHeaderComponent = () => {
     </Fragment> );
 }
  
-export default CoursesHeaderComponent;
+export default SkillsHeaderComponents;
