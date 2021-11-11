@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react'
+import React, { useEffect } from 'react'
 import { Row, Col } from "react-bootstrap";
 import Header from '../Header';
 //Sidebar
@@ -34,9 +34,9 @@ const ViewProfile = () => {
     }, []);
     const loading = useSelector(state => state.view.loading);
     return (
-    <div className="container-lg container-fluid pt-5">
-      {loading? (<div className="loader"></div> ):
-      <Fragment>
+      <div>
+      { loading ? (<div className="loader"></div> ):
+      (<div className="container-lg container-fluid pt-5">
         <Header/>
         <Row className="mt-md-3">
           <Col md={ 3 } className="bg-primary">
@@ -57,8 +57,8 @@ const ViewProfile = () => {
               <MainHobbiesSection/>
             </Col>
         </Row>
-      </Fragment> }
-    </div> );
+      </div>) }
+    </div>);
 }
  
 export default ViewProfile;

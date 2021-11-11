@@ -3,7 +3,7 @@ import { Container, Navbar } from 'react-bootstrap';
 import { Outlet } from 'react-router';
 import './users.css';
 const UsersLayout = () => {
-    return (
+    return (       
         <Fragment>
         <Navbar expand="lg" bg="dark" variant="dark" className="mb-0">
             <Container className="justify-content-center">
@@ -13,8 +13,7 @@ const UsersLayout = () => {
         <Container className="d-flex flex-column user-container">
             <Outlet/>
         </Container>
-        </Fragment>
-     );
+        </Fragment>);
 }
  
 export default UsersLayout;

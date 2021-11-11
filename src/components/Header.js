@@ -15,7 +15,7 @@ const Header = (props) => {
             { user.auth === true ? (
                 <Nav>
                 {props.EditProfile ? (<Nav.Link href="/">Profiles</Nav.Link>) : null}
-                {props.EditProfile ? null : (<Nav.Link href="#!">Edit Profile</Nav.Link>) }        
+                {props.EditProfile ? null : (<Nav.Link href="/Users/EditProfile">Edit Profile</Nav.Link>) }        
                 <Nav.Link onClick={logUserOut}>Logout</Nav.Link>
                 </Nav>
             ) :

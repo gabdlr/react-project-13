@@ -7,7 +7,7 @@ import ViewProfile from "./components/ViewProfile/ViewProfile";
 import UsersLayout from "./components/Users/UsersLayout";
 import Login from "./components/Users";
 import Register from "./components/Users/Register";
-import EditProfile from "./components/Users/EditProfile";
+import EditProfile from "./components/Users/Profile/EditProfile";
 //Redux
 import { Provider } from "react-redux";
 import store from "./store"; 

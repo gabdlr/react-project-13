@@ -20,11 +20,11 @@ const getProfileFailure = state => ({
 });
 
 //Profile info
-export function profileInfo() {
+export function profileInfo(id = "61884778ba53dbaa421ed744") {
     return async (dispatch) => {
         dispatch(getProfileInfo());
         try {
-            const response = await axiosClient.get('api/v1/profile/61884778ba53dbaa421ed744');
+            const response = await axiosClient.get(`api/v1/profile/${id}`);
             dispatch(getProfileInfoSuccess(response.data)); 
         } catch (error) {
             console.log(error);
