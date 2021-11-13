@@ -1,21 +1,31 @@
-import React, {Fragment, useState } from 'react'
-import { Row, Col, Form, Card, Button, Modal } from 'react-bootstrap';
+import React, { Fragment, useState, useEffect } from 'react';
+import { Row, Col, Button, Modal, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { createJob } from '../../../../actions/profileActions';
+import { updateJob, deleteJob } from '../../../../actions/profileActions';
+const EmploymentEntryComponent = (props) => {
 
-const EmploymentHeaderComponent = () => {
-    //Bootstrap's modal
+    const {role, company, period_end, period_start, _id} = props;
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const dispatch = useDispatch();
-
     const [ jobInfo, setJobInfo ] = useState({
+        "_id":"",
         "role":"",
-        "company": "",
-        "period_start": "",
-        "period_end": ""
+        "company":"",
+        "period_start":"",
+        "period_end":""
     });
+
+    useEffect(() => {
+        setJobInfo({
+            "_id":_id,
+            "role":role,
+            "company":company,
+            "period_start":period_start,
+            "period_end":period_end
+        });
+    }, [role, company, period_end, period_start, _id]);
 
     const onChangeHandler = e => {
         setJobInfo({
@@ -25,53 +35,63 @@ const EmploymentHeaderComponent = () => {
     }
 
     const onSubmitHandler = e => {
-        e.preventDefault();
-        dispatch(createJob(jobInfo));
-        setJobInfo(
-        {
-            "role":"",
-            "company": "",
-            "period_start": "",
-            "period_end": ""
-        }
-        );
+        e.preventDefault()
+        dispatch(updateJob(jobInfo));
         handleClose();
+        setJobInfo({
+            "_id":_id,
+            "role":role,
+            "company":company,
+            "period_start":period_start,
+            "period_end":period_end
+        });
     }
-
-    return ( 
-    <Fragment>
-        <Card.Header>
-            <Row>
-                <Col className="d-flex justify-content-between">
-                <h2 className="mb-0 text-white align-self-center"> Employment History</h2>
+    const deleteRegistry = () => {
+        dispatch(deleteJob(jobInfo._id))
+    }
+    return (
+        <Fragment> 
+            <Col className="d-flex justify-content-between pt-2">
+            <div className="w-75 align-self-center">   
+                <h3 className="ps-3 fw-bolder align-self-center mb-0">{company}</h3>
+                <h3 className="ps-3 fw-bolder align-self-center mb-0">{role}</h3>
+            </div>
+            <div className="my-auto text-end">
                 <Button 
-                    variant="transparent" 
-                    onClick={ handleShow }
+                    onClick={handleShow} 
+                    className="me-md-2" 
+                    variant="transparent"
                 >
-                        <i className="bi bi-plus-circle" style={{ fontSize: 30, color: 'white' }}></i>
+                        <i className="bi bi-pencil" style={{ fontSize: 25, color: 'white' }}></i>
                 </Button>
-                </Col>
-            </Row>
-        </Card.Header>
-        <Modal 
-            centered 
-            size="lg" 
-            className="box" 
-            show={show} 
-            onHide={handleClose}
-        >
+                <Button
+                onClick={ deleteRegistry } 
+                variant="transparent"
+                >
+                        <i className="bi bi-dash-circle" style={{ fontSize: 25, color: 'white' }}></i>
+                </Button>
+            </div>
+            </Col>
+            <hr className="mb-0"/>
+            <Modal 
+                centered 
+                size="lg" 
+                className="box" 
+                show={show} 
+                onHide={handleClose}
+            >
             <Modal.Header 
                 className="bg-secondary" 
                 closeButton
             >
-                <Modal.Title className="text-white" > New employ registry</Modal.Title>
+            <Modal.Title className="text-white" > Employ registry</Modal.Title>
             </Modal.Header>
             <Modal.Body className="bg-modal-profile" >
                 <Row className="pb-3">
                     <Col>
                         <Form 
-                            className="mt-md-5 ps-md-5"
-                            onSubmit={onSubmitHandler}
+                        className="mt-md-5 ps-md-5"
+                        onSubmit={ onSubmitHandler }
                         >
                             <Form.Group 
                                 as={Row} 
@@ -88,9 +108,9 @@ const EmploymentHeaderComponent = () => {
                                 <Col sm="8">
                                 <Form.Control 
                                     className="red"
-                                    onChange={e => onChangeHandler(e)}
-                                    value={jobInfo.role||""}  
-                                    name="role" 
+                                    onChange={e => onChangeHandler(e)} 
+                                    name="role"
+                                    value={jobInfo.role||""} 
                                     type="text" 
                                     placeholder="Position" 
                                 />
@@ -111,9 +131,9 @@ const EmploymentHeaderComponent = () => {
                                 <Col sm="8">
                                 <Form.Control 
                                     className="red"
-                                    onChange={e => onChangeHandler(e)}
-                                    value={jobInfo.company||""}   
-                                    name="company" 
+                                    onChange={e => onChangeHandler(e)}  
+                                    name="company"
+                                    value={jobInfo.company||""} 
                                     type="text" 
                                     placeholder="Company" 
                                 />
@@ -131,11 +151,11 @@ const EmploymentHeaderComponent = () => {
                                 Start date
                                 </Form.Label>
                                 <Col sm="8">
-                                <Form.Control 
-                                    name="period_start"
-                                    onChange={e => onChangeHandler(e)}
-                                    value={jobInfo.period_start||""}                                        
+                                <Form.Control
                                     className="red" 
+                                    onChange={e => onChangeHandler(e)} 
+                                    name="period_start"
+                                    value={jobInfo.period_start||""} 
                                     type="date"
                                 />
                                 </Col>
@@ -152,11 +172,11 @@ const EmploymentHeaderComponent = () => {
                                 Finish date
                                 </Form.Label>
                                 <Col sm="8">
-                                <Form.Control
-                                    onChange={e => onChangeHandler(e)}
-                                    value={jobInfo.period_end||""}                                    
-                                    name="period_end" 
-                                    className="red" 
+                                <Form.Control 
+                                    className="red"
+                                    onChange={e => onChangeHandler(e)} 
+                                    name="period_end"
+                                    value={jobInfo.period_end||""} 
                                     type="date"
                                 />
                                 </Col>
@@ -171,7 +191,7 @@ const EmploymentHeaderComponent = () => {
                                         variant="outline-danger" 
                                         className="px-5" 
                                     >
-                                    Add
+                                    Save
                                     </Button>
                                 </Col>
                             </Row>
@@ -182,6 +202,8 @@ const EmploymentHeaderComponent = () => {
             <Modal.Footer className="p-4 bg-secondary">
             </Modal.Footer>
         </Modal>
-    </Fragment> );
+        </Fragment>
+     );
 }
-export default EmploymentHeaderComponent;
+ 
+export default EmploymentEntryComponent;

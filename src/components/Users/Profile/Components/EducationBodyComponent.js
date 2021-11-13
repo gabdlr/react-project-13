@@ -1,26 +1,34 @@
-import React from 'react';
-import { Card, Col, Button } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { Card, Col } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import EducationEntryComponent from './EducationEntryComponent';
 const EducationBodyComponent = () => {
+    
+    const { education } = useSelector(state => state.view.profile);
+    useEffect(() => {
+        
+    }, [education])
     return (
         <Card.Body>
-            <Col className="p-3 ps-3 pb-0 text-white main-desc">
-            <p className="fw-bolder">Seems like you haven't add any education yet, try adding a new one!</p>
-            <hr className="mb-0"></hr>
+
+            <Col className="p-3 text-white main-desc">
+            
+            { education !== undefined ? 
+                education.length > 0 ?
+                (education.map(entry => (
+                <EducationEntryComponent
+                key= {entry._id}
+                _id={entry._id}
+                degree={entry.degree}
+                institution={entry.institution}
+                period_end={entry.period_end}
+                period_start={entry.period_start}
+                state={entry.state}
+                />))) : (<p className="fw-bolder">Seems like you haven't add any education registry yet, try adding a new one!</p>) 
+                : null
+            }
             </Col>
-            <Col className="p-3 ps-3 text-white main-desc">
-                <Col className="d-flex justify-content-between">
-                <h3 className="ps-3 fw-bolder align-self-center mb-0">Title</h3>
-                <div>
-                <Button className="me-2" variant="transparent">
-                        <i className="bi bi-pencil" style={{ fontSize: 25, color: 'white' }}></i>
-                </Button>
-                <Button variant="transparent">
-                        <i className="bi bi-dash-circle" style={{ fontSize: 25, color: 'white' }}></i>
-                </Button>
-                </div>
-                </Col>
-                <hr className="mb-0"></hr>
-            </Col>
+            
         </Card.Body>   
      );
 }

@@ -1,92 +1,119 @@
-import React, {Fragment, useState } from 'react'
-import { Row, Col, Form, Card, Button, Modal } from 'react-bootstrap';
+import React, { Fragment, useState, useEffect } from 'react';
+import { Row, Col, Button, Modal, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { createEducation } from '../../../../actions/profileActions';
+import { updateCourse, deleteCourse } from '../../../../actions/profileActions';
 
-const EducationHeaderComponent = () => {
-    //Bootstrap's modal
+const CoursesEntryComponent = (props) => {
+    const {title, url, institution, date, _id} = props;
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const dispatch = useDispatch();
 
-    const [ educationInfo, setEducationInfo ] = useState({
-        "institution":"",
-        "period_end": "",
-        "period_start": "",
-        "state": ""
+    const [ courseInfo, setCourseInfo ] = useState({
+        "_id": "",
+        "title":"",
+        "url": "",
+        "institution": "",
+        "date": ""
     });
 
+    useEffect(() => {
+        setCourseInfo({
+            "_id": _id,
+            "title": title,
+            "url": url,
+            "institution": institution,
+            "date": date
+        });
+    }, [title, url, institution, date, _id]);
+
     const onChangeHandler = e => {
-        setEducationInfo({
-            ...educationInfo,
+        setCourseInfo({
+            ...courseInfo,
             [e.target.name]:e.target.value
         });
     }
+
     const onSubmitHandler = e => {
-        e.preventDefault();
-        dispatch(createEducation(educationInfo));
-        setEducationInfo(
-        {
-            "institution":"",
-            "period_end": "",
-            "period_start": "",
-            "state": ""
-        }
-        );
+        e.preventDefault()
+        dispatch(updateCourse(courseInfo));
         handleClose();
+        setCourseInfo({
+            "_id": _id,
+            "title": title,
+            "url": url,
+            "institution": institution,
+            "date": date
+        });
     }
 
-   return ( 
-    <Fragment>
-        <Card.Header>
-            <Row>
-                <Col className="d-flex justify-content-between">
-                <h2 className="mb-0 text-white align-self-center">Education</h2>
-                <Button variant="transparent" onClick={ handleShow }>
-                        <i className="bi bi-plus-circle" style={{ fontSize: 30, color: 'white' }}></i>
+    const deleteRegistry = () => {
+        dispatch(deleteCourse(courseInfo._id));
+    }
+
+    return (
+        <Fragment> 
+            <Col className="d-flex justify-content-between pt-2">
+            <div className="w-75 align-self-center">   
+                <h3 className="ps-3 fw-bolder align-self-center mb-0">{title}</h3>
+                <h3 className="ps-3 fw-bolder align-self-center mb-0">{institution}</h3>
+            </div>
+            <div className="my-auto text-end">
+                <Button 
+                    onClick={handleShow} 
+                    className="me-md-2" 
+                    variant="transparent"
+                >
+                        <i className="bi bi-pencil" style={{ fontSize: 25, color: 'white' }}></i>
                 </Button>
-                </Col>
-            </Row>
-        </Card.Header>
-        <Modal 
-            centered 
-            size="lg" 
-            className="box" 
-            show={show} 
-            onHide={handleClose}
-        >
+                <Button
+                onClick={ deleteRegistry } 
+                variant="transparent"
+                >
+                        <i className="bi bi-dash-circle" style={{ fontSize: 25, color: 'white' }}></i>
+                </Button>
+            </div>
+            </Col>
+            <hr className="mb-0"/>
+            <Modal 
+                centered 
+                size="lg" 
+                className="box" 
+                show={show} 
+                onHide={handleClose}
+            >
             <Modal.Header 
                 className="bg-secondary" 
                 closeButton
             >
-                <Modal.Title className="text-white" > New education registry</Modal.Title>
+                <Modal.Title className="text-white"> Certificate registry</Modal.Title>
             </Modal.Header>
             <Modal.Body className="bg-modal-profile" >
                 <Row className="pb-3">
                     <Col>
-                        <Form
-                            
-                            className="mt-md-5 ps-md-5"
-                            onSubmit={onSubmitHandler}
+                        <Form 
+                        className="mt-md-5 ps-md-5"
+                        onSubmit={ onSubmitHandler }
                         >
                             <Form.Group 
                                 as={Row} 
-                                className="mb-md-4 mb-3"
+                                className="mb-md-4 mb-3" 
                                 controlId="formPlaintextInstitution"
                             >
                                 <Form.Label 
-                                    column sm="2" 
-                                    className="text-md-end text-white ps-md-0"
+                                column 
+                                sm="2" 
+                                className="text-md-end text-white ps-md-0"
                                 >
                                 Institution
                                 </Form.Label>
                                 <Col sm="8">
-                                <Form.Control 
+                                <Form.Control
                                     onChange={e => onChangeHandler(e)}
-                                    value={educationInfo.institution||""} 
-                                    className="red"
+                                    value={courseInfo.institution||""}    
                                     name="institution" 
+                                    className="red" 
                                     type="text" 
                                     placeholder="Institution" 
                                 />
@@ -95,83 +122,66 @@ const EducationHeaderComponent = () => {
                             <Form.Group 
                                 as={Row} 
                                 className="mb-md-4 mb-3" 
-                                controlId="formPlaintextDegree"
+                                controlId="formPlaintextTitle"
                             >
                                 <Form.Label 
-                                    column sm="2" 
-                                    className="text-md-end text-white ps-md-0"
+                                column 
+                                sm="2" 
+                                className="text-md-end text-white ps-md-0"
                                 >
-                                Degree
-                                </Form.Label>
-                                <Col sm="8">
-                                <Form.Control
-                                    onChange={e => onChangeHandler(e)}  
-                                    value={educationInfo.degree||""}   
-                                    className="red" 
-                                    name="degree" type="text" 
-                                    placeholder="Degree" 
-                                />
-                                </Col>
-                            </Form.Group>
-                            <Form.Group 
-                                as={Row} 
-                                className="mb-3" 
-                                controlId="formPlaintextStatus"
-                            >
-                                <Form.Label 
-                                    column sm="2" 
-                                    className="text-md-end text-white ps-md-0"
-                                >
-                                Status
+                                Title
                                 </Form.Label>
                                 <Col sm="8">
                                 <Form.Control
                                     onChange={e => onChangeHandler(e)}
-                                    value={educationInfo.state||""}    
+                                    value={courseInfo.title||""}     
+                                    name="title" 
                                     className="red" 
-                                    name="state" 
                                     type="text" 
-                                    placeholder="Status" 
+                                    placeholder="Certificate title" 
                                 />
                                 </Col>
                             </Form.Group>
                             <Form.Group 
                                 as={Row} 
                                 className="mb-3" 
-                                controlId="formPlaintextStartdate"
+                                controlId="formPlaintextTwitter"
                             >
                                 <Form.Label 
+                                    name="twitter" 
                                     column sm="2" 
                                     className="text-md-end text-white ps-md-0"
                                 >
-                                Start date
+                                Url
                                 </Form.Label>
                                 <Col sm="8">
                                 <Form.Control
                                     onChange={e => onChangeHandler(e)}
-                                    value={educationInfo.period_start||""}    
+                                    value={courseInfo.url||""}     
+                                    name="url" 
                                     className="red" 
-                                    name="period_start" 
-                                    type="date"
+                                    type="text" 
+                                    placeholder="Certificate URL" 
                                 />
                                 </Col>
                             </Form.Group>
                             <Form.Group 
                                 as={Row} 
                                 className="mb-3" 
-                                controlId="formPlaintextFisnishdate"
+                                controlId="formPlaintextIssued"
                             >
                                 <Form.Label 
+                                    name="twitter" 
                                     column sm="2" 
                                     className="text-md-end text-white ps-md-0"
                                 >
-                                Finish date
+                                Issued on
                                 </Form.Label>
                                 <Col sm="8">
-                                <Form.Control
+                                    <Form.Control
                                     onChange={e => onChangeHandler(e)}
-                                    value={educationInfo.period_end||""}   
-                                    name="period_end" 
+                                    value={courseInfo.date||""}     
+                                    name="date" 
                                     className="red" 
                                     type="date"
                                 />
@@ -187,7 +197,7 @@ const EducationHeaderComponent = () => {
                                     variant="outline-danger" 
                                     className="px-5" 
                                     >
-                                    Add
+                                    Save
                                     </Button>
                                 </Col>
                             </Row>
@@ -198,6 +208,7 @@ const EducationHeaderComponent = () => {
             <Modal.Footer className="p-4 bg-secondary">
             </Modal.Footer>
         </Modal>
-    </Fragment> );
+        </Fragment>  );
 }
-export default EducationHeaderComponent;
+ 
+export default CoursesEntryComponent;

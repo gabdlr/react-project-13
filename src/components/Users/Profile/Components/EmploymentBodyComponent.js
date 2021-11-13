@@ -1,25 +1,26 @@
 import React from 'react';
-import { Card, Col, Button } from 'react-bootstrap';
+import { Card, Col } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import EmploymentEntryComponent from './EmploymentEntryComponent';
 const EmploymentBodyComponent = () => {
+    const { jobs } = useSelector(state => state.view.profile);
     return ( 
         <Card.Body>
-            <Col className="p-3 ps-3 pb-0 text-white main-desc">
-            <p className="fw-bolder">Seems like you haven't add any employ yet, try adding a new one!</p>
-            <hr className="mb-0"></hr>
-            </Col>
-            <Col className="p-3 ps-3 text-white main-desc">
-                <Col className="d-flex justify-content-between">
-                <h3 className="ps-3 fw-bolder align-self-center mb-0">Title</h3>
-                <div>
-                <Button className="me-2" variant="transparent">
-                        <i className="bi bi-pencil" style={{ fontSize: 25, color: 'white' }}></i>
-                </Button>
-                <Button variant="transparent">
-                        <i className="bi bi-dash-circle" style={{ fontSize: 25, color: 'white' }}></i>
-                </Button>
-                </div>
-                </Col>
-                <hr className="mb-0"></hr>
+            
+            <Col className="p-3 text-white main-desc">
+                { jobs !== undefined ?
+                    jobs.length > 0 ?  
+                    (jobs.map(entry => (
+                    <EmploymentEntryComponent
+                    key= {entry._id}
+                    _id = {entry._id}
+                    role={entry.role}
+                    company={entry.company}
+                    period_end={entry.period_end}
+                    period_start={entry.period_start}
+                    />))) : (<p className="fw-bolder">Seems like you haven't add any employ registry yet, try adding a new one!</p>)
+                     : null
+                }
             </Col>
         </Card.Body>  
      );

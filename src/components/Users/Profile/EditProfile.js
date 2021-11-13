@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import Header from '../../Header';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 //Sections
@@ -12,6 +12,7 @@ import { getAuthenticatedUser } from '../../../actions/userActions';
 import { profileInfo } from '../../../actions/profileActions'
 
 const EditProfile = () => {
+
     const dispatch = useDispatch();
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -20,17 +21,26 @@ const EditProfile = () => {
         if(token){
             const authenticate = () => dispatch(getAuthenticatedUser());
             authenticate();
-            const loadUser = () => dispatch(profileInfo(user.id));
-            loadUser();
         }
-    },[dispatch]);
+    },[dispatch,]);
+
+    const loading =  useSelector(state => state.view.loading)
     
     const user = useSelector(state => state.user);
-    //We load user data after token auth
-    const loading = useSelector(state => state.view.loading)
+    const userId = user.data._id;
+    
+    useLayoutEffect(() => {
+        if(userId){
+            const loadUser = () => dispatch(profileInfo(userId));
+            loadUser();
+        }
+    },[userId, dispatch]);
+
+
     return(
     <div>
     {loading ?  (<div className="loader"></div>) :
+    user.loading ? (<div className="loader"></div>) :
     ( 
         <div className="pt-3">
             <Header

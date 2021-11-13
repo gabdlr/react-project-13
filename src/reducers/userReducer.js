@@ -17,7 +17,7 @@ const initialState = {
     data: {
         id: null,
         name: "Guest",
-        lastname: ""
+        lastname: "",       
     },
     auth: false,
     loading: false,

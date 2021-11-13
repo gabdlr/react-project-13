@@ -3,6 +3,7 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 const PersonalSection = () => {
+
     const {name, lastname, title, picture } = useSelector (state => state.view.profile);
     const [ personalInfo, setPersonalInfo ] = useState({
         "name": "" ,
@@ -11,11 +12,13 @@ const PersonalSection = () => {
     });
 
     useEffect(() => {
-        setPersonalInfo({
-            "name": name ,
-            "lastname": lastname,
-            "title": title
-        })
+        
+            setPersonalInfo({
+                "name": name ,
+                "lastname": lastname,
+                "title": title
+            })
+        
     }, [name,lastname,title]);
 
     const onChangeHandler = (e) => {
@@ -76,7 +79,7 @@ const PersonalSection = () => {
                                 sm="8"
                             >
                             <Form.Control 
-                                value={personalInfo.name} 
+                                value={personalInfo.name || ""} 
                                 onChange={e => onChangeHandler(e)} 
                                 name="name" 
                                 type="text" 
@@ -101,7 +104,7 @@ const PersonalSection = () => {
                                 sm="8"
                             >
                             <Form.Control 
-                                value={personalInfo.lastname} 
+                                value={personalInfo.lastname || ""} 
                                 onChange={e => onChangeHandler(e)} 
                                 name="lastname" 
                                 type="text" 
@@ -124,7 +127,7 @@ const PersonalSection = () => {
                             <Col className="ps-md-5" sm="8">
                             <Form.Control 
                                 name="title" 
-                                value={personalInfo.title} 
+                                value={personalInfo.title || ""} 
                                 onChange={e => onChangeHandler(e)} 
                                 type="text" 
                                 placeholder="Profession" 

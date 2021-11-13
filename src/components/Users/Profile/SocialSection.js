@@ -3,7 +3,8 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 const SocialSection = () => {
-    const { linkedin_url, github_url, twitter_url } = useSelector (state => state.view.profile.social);
+    const socials  = useSelector (state => state.view.profile.social);
+    
     const [ socialInfo, setSocialInfo ] = useState({
         "linkedin_url": "" ,
         "github_url": "",
@@ -11,12 +12,15 @@ const SocialSection = () => {
     });
 
     useEffect(() => {
-        setSocialInfo({
-            "linkedin_url": linkedin_url ,
-            "github_url": github_url,
-            "twitter_url": twitter_url
-        })
-    }, [linkedin_url,github_url,twitter_url]);
+        if (Object.keys(socials).length > 0){
+            setSocialInfo({
+                "linkedin_url": socials.linkedin_url ,
+                "github_url": socials.github_url,
+                "twitter_url": socials.twitter_url
+            });
+        }
+
+     }, [socials]);
 
     const onChangeHandler = (e) => {
         setSocialInfo({
@@ -36,7 +40,7 @@ const SocialSection = () => {
                             </Form.Label>
                             <Col sm="8">
                             <Form.Control 
-                                value={socialInfo.linkedin_url} 
+                                value={socialInfo.linkedin_url}
                                 onChange={ e => onChangeHandler(e)} 
                                 className="red" 
                                 name="linkedin_url" 
@@ -51,7 +55,7 @@ const SocialSection = () => {
                             </Form.Label>
                             <Col sm="8">
                             <Form.Control 
-                                value={socialInfo.github_url} 
+                                value={socialInfo.github_url}
                                 onChange={ e => onChangeHandler(e)} 
                                 className="red" 
                                 name="github_url" 
@@ -66,7 +70,7 @@ const SocialSection = () => {
                             </Form.Label>
                             <Col sm="8">
                             <Form.Control 
-                                value={socialInfo.twitter_url} 
+                                value={socialInfo.twitter_url}
                                 onChange={ e => onChangeHandler(e)} 
                                 className="red" 
                                 type="text" 

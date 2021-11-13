@@ -5,10 +5,12 @@ import { logout } from '../actions/userActions';
 const Header = (props) => {
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
-    const logUserOut = () => dispatch(logout());
+    const logUserOut = () => {
+        dispatch(logout());
+    };
     return (
     <Navbar collapseOnSelect fixed="top" expand="lg" bg="dark" variant="dark" className="navbar-shadow">
-    <Container>
+    <Container fluid="xl">
         <Navbar.Brand>Welcome, {user.data.name} </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">

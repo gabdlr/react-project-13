@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 import { Row, Col } from "react-bootstrap";
 import Header from '../Header';
 //Sidebar
@@ -20,44 +20,55 @@ import { profileInfo } from '../../actions/profileActions'
 import { getAuthenticatedUser } from '../../actions/userActions'
 const ViewProfile = () => {
     const dispatch = useDispatch();
-    useEffect(() => {
-        const loadUser = () => dispatch(profileInfo());
-        loadUser();
+    
+    useLayoutEffect(() => {
         const token = localStorage.getItem('token');
         //If user has token, token is set in header by the authToken fn,
         //and authentication is triggered
         if(token){
           const authenticate = () => dispatch(getAuthenticatedUser());
           authenticate();
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps    
-    }, []);
+        }    
+      }, [dispatch]);
+      
+    const user = useSelector(state => state.user);
     const loading = useSelector(state => state.view.loading);
+
+    useLayoutEffect(() => {
+      if(user.data._id){
+        const loadUser = () => dispatch(profileInfo(user.data._id));
+        loadUser();
+      } 
+    },[dispatch, user]);
+    
+    
     return (
       <div>
-      { loading ? (<div className="loader"></div> ):
-      (<div className="container-lg container-fluid pt-5">
-        <Header/>
-        <Row className="mt-md-3">
-          <Col md={ 3 } className="bg-primary">
-                <Row className="flex-column">
-                  <ProfilePersonalInfo/>
-                  <ProfileStack/>
-                  <ProfileSocial/>
-                </Row>
-            </Col>
-            <Col md={ 9 } className="bg-secondary p-3 pt-2">
-              <NavBar/>
-              <MainAboutSection/>
-              <MainEducationSection/>
-              <MainEmploymentSection/>
-              <MainCoursesSection/>
-              <MainStackSection/>
-              <MainToolsSection/>
-              <MainHobbiesSection/>
-            </Col>
-        </Row>
-      </div>) }
+      { loading ? (<div className="loader"></div> ) : 
+        user.loading  ? <div className="loader"></div> :
+      ( <div className="container-lg container-fluid pt-5">
+          <Header/>
+          <Row className="mt-md-3">
+            <Col md={ 3 } className="bg-primary">
+                  <Row className="flex-column">
+                    <ProfilePersonalInfo/>
+                    <ProfileStack/>
+                    <ProfileSocial/>
+                  </Row>
+              </Col>
+              <Col md={ 9 } className="bg-secondary p-3 pt-2">
+                <NavBar/>
+                <MainAboutSection/>
+                <MainEducationSection/>
+                <MainEmploymentSection/>
+                <MainCoursesSection/>
+                <MainStackSection/>
+                <MainToolsSection/>
+                <MainHobbiesSection/>
+              </Col>
+          </Row>
+        </div>
+      ) }   
     </div>);
 }
  
