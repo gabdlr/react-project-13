@@ -14,9 +14,6 @@ import axiosClient from "../config/axiosClient";
 import authToken from '../config/authToken';
 import useAlertHandler from '../hooks/useAlertHandler';
 
-
-//TODO when erroring pass errors as payload
-
 //Authenticate user
 //Authentication
 const authUser = () => ({
@@ -75,7 +72,6 @@ export function authenticate(userData) {
             const response = await axiosClient.post('/api/v1/auth/', userData);
             dispatch(authUserSuccess(response.data));
         } catch (error) {
-            console.log(error.response);
             dispatch(authUserFailure(true));
             useAlertHandler(error.response.data, "error");  
         }
@@ -116,18 +112,8 @@ export function createNewUser(userData){
            const response = await axiosClient.post('/api/v1/user/', userData);
            dispatch(createUserSuccess(response.data));
        } catch (error) {
-        if (error.response) {
-            // Request made and server responded
-            // console.log(error.response.data);
-            // console.log(error.response.status);
-        } else if (error.request) {
-            // The request was made but no response was received
-            // console.log(error.request);
-        } else {
-            // Something happened in setting up the request that triggered an Error
-            // console.log('Error', error.message);
-        }
-        dispatch(createUserFailure(true));  
+        dispatch(createUserFailure(true));
+        useAlertHandler(error.response.data, "error");   
        } 
     }
 }

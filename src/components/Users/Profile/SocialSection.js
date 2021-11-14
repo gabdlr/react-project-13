@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { updateSocial } from '../../../actions/profileActions'
 
 const SocialSection = () => {
     const socials  = useSelector (state => state.view.profile.social);
-    
+    const dispatch = useDispatch();
+
     const [ socialInfo, setSocialInfo ] = useState({
         "linkedin_url": "" ,
         "github_url": "",
@@ -28,12 +30,26 @@ const SocialSection = () => {
             [e.target.name]: e.target.value
         });
     }
+
+    const onSubmitHandler = e => {
+        e.preventDefault();
+        dispatch(updateSocial(socialInfo));
+        setSocialInfo({
+            "linkedin_url": socials.linkedin_url ,
+            "github_url": socials.github_url,
+            "twitter_url": socials.twitter_url
+        });
+    }
+
     return ( 
         <Container className="bg-secondary mt-3 pt-3">
                 <h2 className="text-white"> Social Information</h2>
                 <Row className="pb-3">
                     <Col>
-                    <Form className="mt-md-5 ps-md-5">
+                    <Form
+                    onSubmit={ onSubmitHandler } 
+                    className="mt-md-5 ps-md-5"
+                    >
                         <Form.Group as={Row} className="mb-md-4 mb-3" controlId="formPlaintextLinkedin">
                             <Form.Label column sm="2" className="text-md-center text-white ps-md-0">
                             LinkedIn URL
@@ -81,7 +97,13 @@ const SocialSection = () => {
                         </Form.Group>
                         <Row className="py-2">
                             <Col sm="10" className="d-flex justify-content-md-end">
-                                <Button variant="outline-danger" className="px-5" >Save</Button>
+                                <Button
+                                type="submit" 
+                                variant="outline-danger" 
+                                className="px-5" 
+                                >
+                                    Save
+                                </Button>
                             </Col>
                         </Row>
                     </Form>

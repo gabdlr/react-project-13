@@ -43,7 +43,26 @@ import {
     DELETE_SKILL,
     DELETE_SKILL_SUCCESS,
     DELETE_SKILL_FAILED,
-    
+
+    UPDATE_PERSONAL,
+    UPDATE_PERSONAL_SUCCESS,
+    UPDATE_PERSONAL_FAILED,
+
+    UPDATE_SOCIAL,
+    UPDATE_SOCIAL_SUCCESS,
+    UPDATE_SOCIAL_FAILED,
+
+    UPDATE_HOBBIE,
+    UPDATE_HOBBIE_SUCCESS,
+    UPDATE_HOBBIE_FAILED,
+
+    UPDATE_ABOUT,
+    UPDATE_ABOUT_SUCCESS,
+    UPDATE_ABOUT_FAILED,
+
+    UPDATE_PICTURE,
+    UPDATE_PICTURE_SUCCESS,
+    UPDATE_PICTURE_FAILED
 
 } from '../types';
 const initialState = {
@@ -87,6 +106,10 @@ export default function (state = initialState, action) {
             });
 
         //Editing profile  (basically just checking current action on redux)
+        case UPDATE_PERSONAL:
+        case UPDATE_SOCIAL:
+        case UPDATE_HOBBIE:
+        case UPDATE_ABOUT:
         case CREATE_EDUCATION:  
         case EDIT_EDUCATION:
         case DELETE_EDUCATION:
@@ -98,10 +121,43 @@ export default function (state = initialState, action) {
         case DELETE_COURSE:
         case CREATE_SKILL:
         case EDIT_SKILL:
-        case DELETE_SKILL:                            
+        case DELETE_SKILL:
+        case UPDATE_PICTURE:                                
             return({
                 ...state
             });
+        case UPDATE_PERSONAL_SUCCESS:
+            return({
+                ...state,
+                profile: { ...state.profile, 
+                "name" : action.payload.name,
+                "lastname": action.payload.lastname,
+                "title": action.payload.title }
+            });    
+        case UPDATE_SOCIAL_SUCCESS:
+            return({
+                ...state,
+                profile:  { ...state.profile, 
+                "social" : action.payload }
+            });
+        case UPDATE_HOBBIE_SUCCESS:
+            return({
+                ...state,
+                profile:  { ...state.profile, 
+                "hobbie" : action.payload }                
+            });
+        case UPDATE_ABOUT_SUCCESS:
+            return({
+                ...state,
+                profile:  { ...state.profile, 
+                    "about" : action.payload }   
+            });
+        case UPDATE_PICTURE_SUCCESS:
+            return({
+                ...state,
+                profile:  { ...state.profile, 
+                "picture" : action.payload }   
+            });                                 
         case CREATE_EDUCATION_SUCCESS:
             return({
                 ...state,
@@ -182,7 +238,8 @@ export default function (state = initialState, action) {
                 profile: { ...state.profile, 
                 "stack" : 
                 state.profile.stack.filter(registry => registry._id !== action.payload)}                   
-            });                                     
+            });
+        case UPDATE_PERSONAL_FAILED:                                         
         case CREATE_EDUCATION_FAILED:                   
         case DELETE_EDUCATION_FAILED:    
         case EDIT_EDUCATION_FAILED:
@@ -194,7 +251,11 @@ export default function (state = initialState, action) {
         case DELETE_COURSE_FAILED:
         case CREATE_SKILL_FAILED:
         case EDIT_SKILL_FAILED:
-        case DELETE_SKILL_FAILED:    
+        case DELETE_SKILL_FAILED:
+        case UPDATE_SOCIAL_FAILED:
+        case UPDATE_HOBBIE_FAILED:
+        case UPDATE_ABOUT_FAILED:
+        case UPDATE_PICTURE_FAILED:                    
             return({
                 ...state,
                 error: true

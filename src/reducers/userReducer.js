@@ -15,7 +15,7 @@ import {
 
 const initialState = {
     data: {
-        id: null,
+        id: "null",
         name: "Guest",
         lastname: "",       
     },

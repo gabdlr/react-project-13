@@ -2,9 +2,10 @@ import Swal from 'sweetalert2';
 
 function useAlertHandler (msg = "Success!", type) {
     //Watch this, TODO uniform server messages
+
     if(type === "error"){
         let errorList
-        if(msg.length > 0){
+        if(msg instanceof Object || Array.isArray(msg) ){
             errorList = msg.join('</br>');
             Swal.fire({
                 title: 'Error!',

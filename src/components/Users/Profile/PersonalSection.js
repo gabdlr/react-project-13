@@ -1,24 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { updatePersonal, updatePicture } from '../../../actions/profileActions';
 
 const PersonalSection = () => {
 
     const {name, lastname, title, picture } = useSelector (state => state.view.profile);
+    const dispatch = useDispatch();
+    
     const [ personalInfo, setPersonalInfo ] = useState({
         "name": "" ,
         "lastname": "",
         "title": ""
     });
 
+    const [ filePicture , setPicture ] = useState(null);
+    const pictureUpload = e => {
+        setPicture(e.target.files[0]);
+    }
+    useEffect(()=>{
+        if(filePicture){
+            dispatch(updatePicture(filePicture));
+            setPicture(null)
+        }
+    },[filePicture, dispatch])
+
     useEffect(() => {
-        
-            setPersonalInfo({
-                "name": name ,
-                "lastname": lastname,
-                "title": title
-            })
-        
+        setPersonalInfo({
+            "name": name ,
+            "lastname": lastname,
+            "title": title
+        });  
     }, [name,lastname,title]);
 
     const onChangeHandler = (e) => {
@@ -27,7 +39,17 @@ const PersonalSection = () => {
             [e.target.name]: e.target.value
         });
     }
-   
+    
+    const onSubmitHandler = e => {
+        e.preventDefault();
+        dispatch(updatePersonal(personalInfo));
+        setPersonalInfo({
+            "name": name ,
+            "lastname": lastname,
+            "title": title
+        });
+    }
+
     return ( 
         <Container className="bg-primary mt-5">
                 <h2 className="text-white"> Personal information</h2>
@@ -52,15 +74,18 @@ const PersonalSection = () => {
                             >
                             </img>
                         </label>
-                        <input 
+                        <input
+                            onChange={ pictureUpload } 
                             id="file-input" 
-                            type="file" 
+                            type="file"
+                            name="picture" 
                         />    
                         </div>
                     </Col>
                     <Col md={9} >
                     <Form 
                         className="mt-md-4 mt-xl-5 ps-md-5"
+                        onSubmit={ onSubmitHandler }
                     >
                         <Form.Group 
                             as={Row} 
@@ -139,7 +164,8 @@ const PersonalSection = () => {
                                 sm="9" 
                                 className="d-flex justify-content-md-end"
                             >
-                                <Button 
+                                <Button
+                                    type="submit" 
                                     variant="outline-primary" 
                                     className="px-5" 
                                 >Save

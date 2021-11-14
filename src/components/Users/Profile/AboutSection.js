@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { updateAbout } from '../../../actions/profileActions';
 
 const AboutSection = () => {
 
     const about  = useSelector (state => state.view.profile.about);
+    const dispatch = useDispatch();
 
     const [ aboutInfo, setAboutInfo ] = useState("");
-
     useEffect(() => {
         if (about){
             setAboutInfo(about);
@@ -20,6 +21,11 @@ const AboutSection = () => {
         );
     }
 
+    const onSubmitHandler = e => {
+        e.preventDefault();
+        dispatch(updateAbout({"about":aboutInfo}));
+    }
+
     return ( 
     <Container className="bg-primary mt-3 pt-3">
         <h2 className="text-white"> About</h2>
@@ -28,7 +34,10 @@ const AboutSection = () => {
                 md={10} 
                 className="ps-md-5"
             >
-            <Form className="mt-2 ps-md-5">
+            <Form 
+                className="mt-2 ps-md-5"
+                onSubmit= {onSubmitHandler }
+            >
             <Form.Group 
                 className="mb-3" 
                 controlId="Form.ControlTextarea1"
@@ -44,7 +53,8 @@ const AboutSection = () => {
             </Form.Group>
                 <Row className="py-2">
                     <Col className="d-flex justify-content-md-end">
-                        <Button 
+                        <Button
+                            type="submit" 
                             variant="outline-primary" 
                             className="px-5" 
                         >

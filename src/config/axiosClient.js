@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-    //http://localhost:4000/
+    //https://gabresumeapp.herokuapp.com/ http://localhost:4000/
     baseURL: 'https://gabresumeapp.herokuapp.com/'
 });
 

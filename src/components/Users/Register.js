@@ -14,7 +14,14 @@ const Register = () => {
             "name": "",
             "lastname": "",
             "email": "",
-            "password": ""
+            "password": "",
+            "about":"",
+            "hobbies":"",
+            "social":{
+                "linkedin_url":"",
+                "github_url": "",
+                "twitter_url": ""
+            }
         });
     
         const onChangeHandler = e => {

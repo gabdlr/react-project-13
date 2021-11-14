@@ -40,7 +40,23 @@ import {
     EDIT_SKILL_FAILED,
     DELETE_SKILL,
     DELETE_SKILL_SUCCESS,
-    DELETE_SKILL_FAILED
+    DELETE_SKILL_FAILED,
+
+    UPDATE_PERSONAL,
+    UPDATE_PERSONAL_SUCCESS,
+    UPDATE_PERSONAL_FAILED,
+    UPDATE_SOCIAL,
+    UPDATE_SOCIAL_SUCCESS,
+    UPDATE_SOCIAL_FAILED,
+    UPDATE_HOBBIE,
+    UPDATE_HOBBIE_SUCCESS,
+    UPDATE_HOBBIE_FAILED,
+    UPDATE_ABOUT,
+    UPDATE_ABOUT_SUCCESS,
+    UPDATE_ABOUT_FAILED,
+    UPDATE_PICTURE,
+    UPDATE_PICTURE_SUCCESS,
+    UPDATE_PICTURE_FAILED
 
 } from '../types';
 import axiosClient from "../config/axiosClient";
@@ -59,6 +75,70 @@ const getProfileFailure = state => ({
     type: GET_PROFILE_FAILED,
     payload: state,
 });
+
+//Non createable nor deleteable
+//Update personal info (name, lastname, title)
+const updatePersonalInfo = () => ({
+    type: UPDATE_PERSONAL,
+});
+const updatePersonalInfoSuccess = registry => ({
+    type: UPDATE_PERSONAL_SUCCESS,
+    payload: registry
+});
+const updatePersonalInfoFailure = state => ({
+    type: UPDATE_PERSONAL_FAILED,
+    payload: state
+});
+//Update social info
+const updateSocialInfo = () => ({
+    type: UPDATE_SOCIAL
+});
+const updateSocialInfoSuccess = registry => ({
+    type: UPDATE_SOCIAL_SUCCESS,
+    payload: registry
+});
+const updateSocialInfoFailure = state => ({
+    type: UPDATE_SOCIAL_FAILED,
+    payload: state
+});
+//Update hobbie info
+const updateHobbieInfo = () => ({
+    type: UPDATE_HOBBIE
+});
+const updateHobbieInfoSuccess = registry => ({
+    type: UPDATE_HOBBIE_SUCCESS,
+    payload: registry
+});
+const updateHobbieInfoFailure = state => ({
+    type: UPDATE_HOBBIE_FAILED,
+    payload: state
+});
+//Update about info
+const updateAboutInfo = () => ({
+    type: UPDATE_ABOUT
+});
+const updateAboutInfoSuccess = registry => ({
+    type: UPDATE_ABOUT_SUCCESS,
+    payload: registry
+});
+const updateAboutInfoFailure = state => ({
+    type: UPDATE_ABOUT_FAILED,
+    payload: state
+});
+//Update picture
+const updatePictureInfo = () => ({
+    type: UPDATE_PICTURE
+});
+const updatePictureInfoSuccess = registry => ({
+    type: UPDATE_PICTURE_SUCCESS,
+    payload: registry
+});
+const updatePictureInfoFailure = state => ({
+    type: UPDATE_PICTURE_FAILED,
+    payload: state
+});
+
+
 
 //Create education info
 const createEducationInfo = () => ({
@@ -208,7 +288,7 @@ const deleteSkillInfoFailure = state => ({
     payload: state
 });
 
-//Profile info
+//Full Profile info get
 export function profileInfo(id) {
     return async (dispatch) => {
         dispatch(getProfileInfo());
@@ -220,6 +300,87 @@ export function profileInfo(id) {
         }
     }
 }
+
+//Personal info update
+export function updatePersonal (registry) {
+    return async (dispatch) => {
+        dispatch(updatePersonalInfo())
+        try {
+            const response = await axiosClient.put('/api/v1/personal/personal/', registry);
+            dispatch(updatePersonalInfoSuccess(response.data.registry));
+            useAlertHandler(response.data.msg, "success");
+        } catch (error) {
+            console.log(error);
+             dispatch(updatePersonalInfoFailure(true));
+             useAlertHandler(error.response.data, "error");
+        }
+    }    
+}
+//Social info update
+export function updateSocial (registry) {
+    return async (dispatch) => {
+        dispatch(updateSocialInfo())
+        try {
+            const response = await axiosClient.put('/api/v1/personal/social/', registry);
+            dispatch(updateSocialInfoSuccess(response.data.registry));
+            useAlertHandler(response.data.msg, "success");
+        } catch (error) {
+            console.log(error);
+             dispatch(updateSocialInfoFailure(true));
+             useAlertHandler(error.response.data, "error");
+        }
+    }
+}
+//Hobbie info update
+export function updateHobbies (registry) {
+    return async (dispatch) => {
+        dispatch(updateHobbieInfo())
+        try {
+            const response = await axiosClient.put('/api/v1/personal/hobbies/', registry);
+            dispatch(updateHobbieInfoSuccess(response.data.registry));
+            useAlertHandler(response.data.msg, "success");
+        } catch (error) {
+            console.log(error);
+             dispatch(updateHobbieInfoFailure(true));
+             useAlertHandler(error.response.data, "error");
+        }
+    }
+}
+//About info update
+export function updateAbout (registry) {
+    return async (dispatch) => {
+        dispatch(updateAboutInfo())
+        try {
+            const response = await axiosClient.put('/api/v1/personal/about/', registry);
+            dispatch(updateAboutInfoSuccess(response.data.registry));
+            useAlertHandler(response.data.msg, "success");
+        } catch (error) {
+            console.log(error);
+             dispatch(updateAboutInfoFailure(true));
+             useAlertHandler(error.response.data, "error");
+        }
+    }
+}
+//Profile picture update
+export function updatePicture (registry) {
+    return async (dispatch) => {
+        dispatch(updatePictureInfo())
+        try {
+            const formData = new FormData();
+            const config = { headers: {'content-type': 'multipart/form-data'}}
+            formData.append('picture', registry);
+            const response = await axiosClient.put('api/v1/pictures', formData, config );
+            dispatch(updatePictureInfoSuccess(response.data.registry));
+            useAlertHandler(response.data.msg, "success");
+        } catch (error) {
+            console.log(error);
+             dispatch(updatePictureInfoFailure(true));
+             useAlertHandler(error.response.data, "error");
+        }
+    }    
+}
+
+
 
 //Education info
 export function createEducation(registry){
