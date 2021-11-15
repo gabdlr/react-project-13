@@ -75,8 +75,8 @@ const ViewProfile = () => {
                 <MainEducationSection/>
                 <MainEmploymentSection/>
                 <MainCoursesSection/>
-                <MainStackSection/>
-                <MainToolsSection/>
+                {/* <MainStackSection/>
+                <MainToolsSection/> */}
                 <MainHobbiesSection/>
               </Col>
           </Row>
