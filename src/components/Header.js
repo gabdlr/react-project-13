@@ -16,7 +16,9 @@ const Header = (props) => {
         <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
             { user.auth === true ? (
                 <Nav>
-                {props.EditProfile ? (<Nav.Link href="/">Profiles</Nav.Link>) : null}
+                {props.Home ? (<Nav.Link href="/">Home</Nav.Link>) : null }
+                {props.EditProfile ? (<Nav.Link href="/">Home</Nav.Link>) : null }
+                {props.EditProfile ? (<Nav.Link href={`/ViewProfile/${user.data._id}`}>My Profile</Nav.Link>) : null}
                 {props.EditProfile ? null : (<Nav.Link href="/Users/EditProfile">Edit Profile</Nav.Link>) }        
                 <Nav.Link onClick={logUserOut}>Logout</Nav.Link>
                 </Nav>

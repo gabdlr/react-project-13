@@ -39,7 +39,7 @@ export default function (state = initialState, action) {
             return{
                 ...state,
                 loading: false,
-                auth:true
+                auth: true
             }
         case GET_AUTHENTICATED_USER_SUCCESS:
             return{

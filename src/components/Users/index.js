@@ -35,17 +35,18 @@ const Login = () => {
     
         const dispatch = useDispatch();
         const fireAuthentication = (userInfo) => dispatch(authenticate(userInfo));
-    
+
         //Listen for authentication
-        const auth = useSelector(state => state.user.auth);
+        const authenticatedUser = useSelector(state => state.user);
         const navigate = useNavigate();
+
         useEffect(() => {
             const userAuthenticated = () => dispatch(getAuthenticatedUser());
-            if(auth){
+            if(authenticatedUser.auth){
                 userAuthenticated();
                 navigate('/');
             }
-        },[auth, dispatch, navigate])
+        },[authenticatedUser, dispatch, navigate])
 
     return ( 
         <Col className="bg-primary px-5 pt-5 pb-3 rounded mt-5 box">

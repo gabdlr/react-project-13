@@ -1,28 +1,29 @@
 import React, { useLayoutEffect, useEffect } from 'react'
 import { Row, Col } from "react-bootstrap";
-import { useParams, useNavigate } from 'react-router';
-import Header from '../Header';
+import { useParams } from 'react-router';
+import Header from './Header';
 //Sidebar
-import ProfilePersonalInfo from "./SideBar/ProfilePersonalInfo";
-import ProfileStack from "./SideBar/ProfileStack";
-import ProfileSocial from "./SideBar/ProfileSocial";
+import ProfilePersonalInfo from "./ViewProfile/SideBar/ProfilePersonalInfo";
+import ProfileStack from "./ViewProfile/SideBar/ProfileStack";
+import ProfileSocial from "./ViewProfile/SideBar/ProfileSocial";
 //Main
-import NavBar from './Main/NavBar';
-import MainEducationSection from "./Main/MainEducationSection";
-import MainEmploymentSection from "./Main/MainEmploymentSection";
-import MainCoursesSection from "./Main/MainCoursesSection";
-import MainStackSection from "./Main/MainStackSection";
-import MainToolsSection from "./Main/MainToolsSection";
-import MainHobbiesSection from "./Main/MainHobbiesSection";
-import MainAboutSection from './Main/MainAboutSection';
+import NavBar from './ViewProfile/Main/NavBar';
+import MainEducationSection from "./ViewProfile/Main/MainEducationSection";
+import MainEmploymentSection from "./ViewProfile/Main/MainEmploymentSection";
+import MainCoursesSection from "./ViewProfile/Main/MainCoursesSection";
+import MainStackSection from "./ViewProfile/Main/MainStackSection";
+import MainToolsSection from "./ViewProfile/Main/MainToolsSection";
+import MainHobbiesSection from "./ViewProfile/Main/MainHobbiesSection";
+import MainAboutSection from './ViewProfile/Main/MainAboutSection';
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { profileInfo } from '../../actions/profileActions'
-import { getAuthenticatedUser } from '../../actions/userActions'
-const ViewProfile = () => {
+import { profileInfo } from '../actions/profileActions'
+import { getAuthenticatedUser } from '../actions/userActions'
+const Home = () => {
     const params = useParams();
-    console.log(params);
     const dispatch = useDispatch();
+    const user = useSelector(state => state.user);
+    const loading = useSelector(state => state.view.loading);
 
     useEffect(() => {
       const token = localStorage.getItem('token');
@@ -32,35 +33,21 @@ const ViewProfile = () => {
           const authenticate = () => dispatch(getAuthenticatedUser());
           authenticate();
       }
-  },[dispatch,]);
-  
-    const user = useSelector(state => state.user);
-    const loading = useSelector(state => state.view.loading);
-
-    useLayoutEffect(() => {
-      if(params.id){
-        const loadUser = () => dispatch(profileInfo(params.id));
-        loadUser();
-        return;
-      } 
-    },[dispatch, user, params.id]);
+      
+    },[dispatch,]);
     
-    const userId = user.data._id;
-    
-    const navigate = useNavigate();
     useLayoutEffect(() => {
-        if(userId&&!params.id){
-          navigate('/ViewProfile/'+userId)
+          const loadUser = () => dispatch(profileInfo("61884778ba53dbaa421ed744"));
+          loadUser();
           return;
-        }
-    },[userId, navigate, params, user]);
-    
+      },[dispatch]);
+
     return (
       <div>
       { loading ? (<div className="loader"></div> ) : 
         user.loading  ? <div className="loader"></div> :
       ( <div className="container-lg container-fluid pt-5">
-          <Header Home={true}/>
+          <Header home={true}/>
           <Row className="mt-md-3">
             <Col md={ 3 } className="bg-primary">
                   <Row className="flex-column">
@@ -85,4 +72,4 @@ const ViewProfile = () => {
     </div>);
 }
  
-export default ViewProfile;
+export default Home;
