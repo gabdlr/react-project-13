@@ -62,7 +62,7 @@ const PersonalSection = () => {
                     >
                         {/*TODO add camera icon over the image when hover */}
                         <div 
-                            className="p-lg-3 p-xl-4 picture-edit"
+                            className="pt-2 p-md-1 p-lg-3 p-xl-4 picture-edit"
                         >
                         <label 
                             htmlFor="file-input"
