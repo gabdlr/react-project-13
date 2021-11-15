@@ -124,7 +124,7 @@ const SkillsEntryComponent = (props) => {
                                         <Form.Select 
                                             className="red"
                                             onChange={e => onChangeHandler(e)}
-                                            value={skillInfo.expertise||""}  
+                                            value={skillInfo.expertise}  
                                             name="expertise" 
                                             aria-label="Expertise"
                                         >

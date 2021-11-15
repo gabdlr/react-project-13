@@ -99,6 +99,7 @@ body{
 }
 .profile-pic {
   width:250px;
+  height: 250px;
   border-radius: 50%;
 }
 @media (min-width:992px) {

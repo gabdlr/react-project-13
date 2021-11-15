@@ -14,6 +14,8 @@ const PersonalSection = () => {
         "title": ""
     });
 
+    const [disabledButton, setDisabledButton] = useState(true);
+
     const [ filePicture , setPicture ] = useState(null);
     const pictureUpload = e => {
         setPicture(e.target.files[0]);
@@ -38,6 +40,7 @@ const PersonalSection = () => {
             ...personalInfo,
             [e.target.name]: e.target.value
         });
+        setDisabledButton(false);
     }
     
     const onSubmitHandler = e => {
@@ -165,6 +168,7 @@ const PersonalSection = () => {
                                 className="d-flex justify-content-md-end"
                             >
                                 <Button
+                                    disabled={disabledButton}
                                     type="submit" 
                                     variant="outline-primary" 
                                     className="px-5" 

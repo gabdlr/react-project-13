@@ -6,6 +6,7 @@ const HobbiesBodyComponent = () => {
 
     const hobbies  = useSelector (state => state.view.profile.hobbies);
     const [ hobbiesInfo, setHobbiesInfo ] = useState("");
+    const [disabledButton, setDisabledButton] = useState(true);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -21,6 +22,7 @@ const HobbiesBodyComponent = () => {
         setHobbiesInfo(
             [e.target.name] = e.target.value
         );
+        setDisabledButton(false);
     }
     const onSubmitHandler = e => {
         e.preventDefault();
@@ -45,6 +47,7 @@ const HobbiesBodyComponent = () => {
                 <Row className="py-2">
                     <Col className="d-flex justify-content-md-end">
                         <Button
+                            disabled={disabledButton}
                             type="submit" 
                             variant="outline-danger" 
                             className="px-5 btn-fix" 

@@ -6,7 +6,7 @@ import { updateSocial } from '../../../actions/profileActions'
 const SocialSection = () => {
     const socials  = useSelector (state => state.view.profile.social);
     const dispatch = useDispatch();
-
+    const [disabledButton, setDisabledButton] = useState(true);
     const [ socialInfo, setSocialInfo ] = useState({
         "linkedin_url": "" ,
         "github_url": "",
@@ -29,6 +29,7 @@ const SocialSection = () => {
             ...socialInfo,
             [e.target.name]: e.target.value
         });
+        setDisabledButton(false);
     }
 
     const onSubmitHandler = e => {
@@ -98,6 +99,7 @@ const SocialSection = () => {
                         <Row className="py-2">
                             <Col sm="10" className="d-flex justify-content-md-end">
                                 <Button
+                                disabled={disabledButton}
                                 type="submit" 
                                 variant="outline-danger" 
                                 className="px-5" 

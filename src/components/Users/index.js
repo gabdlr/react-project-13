@@ -44,7 +44,7 @@ const Login = () => {
             const userAuthenticated = () => dispatch(getAuthenticatedUser());
             if(authenticatedUser.auth){
                 userAuthenticated();
-                navigate('/');
+                navigate('/Users/EditProfile');
             }
         },[authenticatedUser, dispatch, navigate])
 

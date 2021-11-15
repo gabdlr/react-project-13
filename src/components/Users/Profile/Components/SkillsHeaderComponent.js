@@ -12,7 +12,7 @@ const SkillsHeaderComponents = () => {
     
     const [ skillInfo, setSkillInfo ] = useState({
         "technology":"",
-        "expertise": ""
+        "expertise": "1"
     });
 
     const onChangeHandler = e => {

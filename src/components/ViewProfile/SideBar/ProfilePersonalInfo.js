@@ -7,7 +7,7 @@ const ProfilePersonalInfo = () => {
     const { name, lastname, title, email, picture } = useSelector(state => state.view.profile);
     return (
         <Col>
-            <Col className="d-flex my-4 justify-content-md-center pic-container">              
+            <Col className="d-flex my-4 justify-content-center pic-container">              
                     <img src={picture} className="profile-pic profile-view" alt="" />
             </Col>
             <Col className="description">

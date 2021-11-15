@@ -91,7 +91,6 @@ export function getAuthenticatedUser() {
         try {
             const response = await axiosClient.get('/api/v1/auth');
             dispatch(getAuthUserSuccess(response.data))
-            console.log(response.data) 
         } catch (error) {
             dispatch(getAuthUserFailure(true));
         }

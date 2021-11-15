@@ -52,7 +52,7 @@ const Register = () => {
             const userAuthenticated = () => dispatch(getAuthenticatedUser());
             if(auth){
                 userAuthenticated();
-                navigate('/');
+                navigate('/Users/ViewProfile/');
             }
         },[auth, dispatch, navigate])
 

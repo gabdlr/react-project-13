@@ -7,7 +7,7 @@ const AboutSection = () => {
 
     const about  = useSelector (state => state.view.profile.about);
     const dispatch = useDispatch();
-
+    const [disabledButton, setDisabledButton] = useState(true);
     const [ aboutInfo, setAboutInfo ] = useState("");
     useEffect(() => {
         if (about){
@@ -19,6 +19,7 @@ const AboutSection = () => {
         setAboutInfo(
             [e.target.name] = e.target.value
         );
+        setDisabledButton(false);
     }
 
     const onSubmitHandler = e => {
@@ -54,6 +55,7 @@ const AboutSection = () => {
                 <Row className="py-2">
                     <Col className="d-flex justify-content-md-end">
                         <Button
+                            disabled={disabledButton}
                             type="submit" 
                             variant="outline-primary" 
                             className="px-5" 

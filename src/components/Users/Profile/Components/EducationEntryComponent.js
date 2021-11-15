@@ -6,6 +6,7 @@ import { updateEducation, deleteEducation } from '../../../../actions/profileAct
 const EducationEntryComponent = (props) => {
     const {degree, institution, period_end, period_start, state, _id} = props;
     const [show, setShow] = useState(false);
+    const [disabledButton, setDisabledButton] = useState(true);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const EducationEntryComponent = (props) => {
             ...educationInfo,
             [e.target.name]:e.target.value
         });
+        setDisabledButton(false);
     }
     
     const onSubmitHandler = e => {
@@ -210,6 +212,7 @@ const EducationEntryComponent = (props) => {
                                         className="d-flex justify-content-end"
                                     >
                                         <Button
+                                        disabled={disabledButton}
                                         type="submit" 
                                         variant="outline-danger" 
                                         className="px-5" 
