@@ -1,6 +1,9 @@
 //Sense of humor is important
 
 function useDateBeautifier (ugglyDate) {
+    if (ugglyDate === null){
+        return null;
+    }
     if (ugglyDate === undefined){
         return null;
     }

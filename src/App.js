@@ -13,6 +13,7 @@ import EditProfile from "./components/Users/Profile/EditProfile";
 import { Provider } from "react-redux";
 import store from "./store"; 
 import Protected from "./components/Protected";
+import Logout from "./components/Logout";
 
 //Search for token
 const token = localStorage.getItem('token');
@@ -36,6 +37,7 @@ function App() {
                 <EditProfile/>
               </Protected>} 
             />
+            <Route path="/Logout" element={<Logout/>}/>
           </Routes>
         </Provider>
       </Router>

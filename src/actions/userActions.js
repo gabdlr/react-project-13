@@ -73,7 +73,7 @@ export function authenticate(userData) {
             dispatch(authUserSuccess(response.data));
         } catch (error) {
             dispatch(authUserFailure(true));
-            //useAlertHandler(error.response.data, "error");  
+            useAlertHandler(error.response.data, "error");  
         }
     }
 }

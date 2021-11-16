@@ -11,8 +11,6 @@ import NavBar from './Main/NavBar';
 import MainEducationSection from "./Main/MainEducationSection";
 import MainEmploymentSection from "./Main/MainEmploymentSection";
 import MainCoursesSection from "./Main/MainCoursesSection";
-import MainStackSection from "./Main/MainStackSection";
-import MainToolsSection from "./Main/MainToolsSection";
 import MainHobbiesSection from "./Main/MainHobbiesSection";
 import MainAboutSection from './Main/MainAboutSection';
 //Redux
@@ -21,7 +19,6 @@ import { profileInfo } from '../../actions/profileActions'
 import { getAuthenticatedUser } from '../../actions/userActions'
 const ViewProfile = () => {
     const params = useParams();
-    console.log(params);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -75,8 +72,6 @@ const ViewProfile = () => {
                 <MainEducationSection/>
                 <MainEmploymentSection/>
                 <MainCoursesSection/>
-                {/* <MainStackSection/>
-                <MainToolsSection/> */}
                 <MainHobbiesSection/>
               </Col>
           </Row>
