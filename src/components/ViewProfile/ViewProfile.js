@@ -13,6 +13,7 @@ import MainEmploymentSection from "./Main/MainEmploymentSection";
 import MainCoursesSection from "./Main/MainCoursesSection";
 import MainHobbiesSection from "./Main/MainHobbiesSection";
 import MainAboutSection from './Main/MainAboutSection';
+import MainSkillsSection from './Main/MainSkillsSection';
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { profileInfo } from '../../actions/profileActions'
@@ -32,7 +33,7 @@ const ViewProfile = () => {
   },[dispatch,]);
   
     const user = useSelector(state => state.user);
-    const loading = useSelector(state => state.view.loading);
+    const profile = useSelector(state => state.view);
 
     useLayoutEffect(() => {
       if(params.id){
@@ -51,10 +52,9 @@ const ViewProfile = () => {
           return;
         }
     },[userId, navigate, params, user]);
-    
     return (
       <div>
-      { loading ? (<div className="loader"></div> ) : 
+      { profile.loading ? (<div className="loader"></div> ) : 
         user.loading  ? <div className="loader"></div> :
       ( <div className="container-lg container-fluid pt-5">
           <Header Home={true}/>
@@ -68,11 +68,12 @@ const ViewProfile = () => {
               </Col>
               <Col md={ 9 } className="bg-secondary p-3 pt-2">
                 <NavBar/>
-                <MainAboutSection/>
-                <MainEducationSection/>
-                <MainEmploymentSection/>
-                <MainCoursesSection/>
-                <MainHobbiesSection/>
+                {profile.profile.about === "" ? null : <MainAboutSection/>}
+                {!profile.profile.education.length ? null : <MainEducationSection/>}
+                {!profile.profile.jobs.length ? null : <MainEmploymentSection/>}
+                {!profile.profile.courses.length ? null : <MainCoursesSection/>}
+                {profile.profile.hobbies === "" ? null : <MainHobbiesSection/>}
+                {!profile.profile.stack.length ? null : <MainSkillsSection/> }
               </Col>
           </Row>
         </div>

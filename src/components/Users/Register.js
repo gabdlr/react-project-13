@@ -31,21 +31,22 @@ const Register = () => {
               [ e.target.name]: e.target.value 
             });
         }
+        
+        const dispatch = useDispatch();
+        const fireCreateUser = (userInfo) => dispatch(createNewUser(userInfo));
 
         //Fact: bootstrap is not preventing the form to submit when errors
         //thanks backend validation
         const onSubmitHandler = (e) => {
             const form = e.currentTarget;
+            e.preventDefault();
             if (form.checkValidity() === false) {
-              e.preventDefault();
               e.stopPropagation();
             }
             setValidated(true);
             fireCreateUser(user);     
         }
     
-        const dispatch = useDispatch();
-        const fireCreateUser = (userInfo) => dispatch(createNewUser(userInfo));
     
         //Listen for authentication
         const auth = useSelector(state => state.user.auth);
@@ -54,7 +55,7 @@ const Register = () => {
             const userAuthenticated = () => dispatch(getAuthenticatedUser());
             if(auth){
                 userAuthenticated();
-                navigate('/Users/ViewProfile/');
+                navigate('/Users/EditProfile/');
             }
         },[auth, dispatch, navigate])
 

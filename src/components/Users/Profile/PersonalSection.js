@@ -54,7 +54,7 @@ const PersonalSection = () => {
     }
 
     return ( 
-        <Container className="bg-primary mt-5">
+        <Container className="bg-primary mt-5 pt-3">
                 <h2 className="text-white"> Personal information</h2>
                 <Row 
                     className="pb-3"
