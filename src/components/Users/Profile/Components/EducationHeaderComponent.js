@@ -2,7 +2,7 @@ import React, {Fragment, useState } from 'react'
 import { Row, Col, Form, Card, Button, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { createEducation } from '../../../../actions/profileActions';
-
+import useDateBeautifier from '../../../../hooks/useDateBeautifier';
 const EducationHeaderComponent = () => {
     //Bootstrap's modal
     const [show, setShow] = useState(false);
@@ -38,7 +38,7 @@ const EducationHeaderComponent = () => {
         );
         handleClose();
     }
-
+    educationInfo.period_start = useDateBeautifier(educationInfo.period_start);
    return ( 
     <Fragment>
         <Card.Header>

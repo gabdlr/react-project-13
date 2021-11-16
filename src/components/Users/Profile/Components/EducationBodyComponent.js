@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Card, Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import EducationEntryComponent from './EducationEntryComponent';
+
 const EducationBodyComponent = () => {
     
     const { education } = useSelector(state => state.view.profile);

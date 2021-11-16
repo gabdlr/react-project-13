@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Row, Col, Button, Modal, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { updateCourse, deleteCourse } from '../../../../actions/profileActions';
-
+import useDateInputfier from '../../../../hooks/useDateInputfier';
 const CoursesEntryComponent = (props) => {
     const {title, url, institution, date, _id} = props;
     const [show, setShow] = useState(false);
@@ -182,7 +182,7 @@ const CoursesEntryComponent = (props) => {
                                 <Col sm="8">
                                     <Form.Control
                                     onChange={e => onChangeHandler(e)}
-                                    value={courseInfo.date||""}     
+                                    value={useDateInputfier(courseInfo.date)||""}     
                                     name="date" 
                                     className="red" 
                                     type="date"

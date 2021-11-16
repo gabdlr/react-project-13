@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Row, Col, Button, Modal, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { updateJob, deleteJob } from '../../../../actions/profileActions';
+import useDateInputfier from '../../../../hooks/useDateInputfier'
 const EmploymentEntryComponent = (props) => {
 
     const {role, company, period_end, period_start, _id} = props;
@@ -157,7 +158,7 @@ const EmploymentEntryComponent = (props) => {
                                     className="red" 
                                     onChange={e => onChangeHandler(e)} 
                                     name="period_start"
-                                    value={jobInfo.period_start||""} 
+                                    value={useDateInputfier(jobInfo.period_start)||""} 
                                     type="date"
                                 />
                                 </Col>
@@ -178,7 +179,7 @@ const EmploymentEntryComponent = (props) => {
                                     className="red"
                                     onChange={e => onChangeHandler(e)} 
                                     name="period_end"
-                                    value={jobInfo.period_end||""} 
+                                    value={useDateInputfier(jobInfo.period_end)||""} 
                                     type="date"
                                 />
                                 </Col>

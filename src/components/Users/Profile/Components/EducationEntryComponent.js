@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Row, Col, Button, Modal, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { updateEducation, deleteEducation } from '../../../../actions/profileActions';
-
+import useDateInputfier from '../../../../hooks/useDateInputfier'
 const EducationEntryComponent = (props) => {
     const {degree, institution, period_end, period_start, state, _id} = props;
     const [show, setShow] = useState(false);
@@ -178,7 +178,7 @@ const EducationEntryComponent = (props) => {
                                     <Col sm="8">
                                     <Form.Control
                                         onChange={e => onChangeHandler(e)}
-                                        value={educationInfo.period_start||""}   
+                                        value={useDateInputfier(educationInfo.period_start)||""}   
                                         name="period_start" 
                                         className="red" 
                                         type="date"
@@ -199,7 +199,7 @@ const EducationEntryComponent = (props) => {
                                     <Col sm="8">
                                     <Form.Control
                                         onChange={e => onChangeHandler(e)}
-                                        value={educationInfo.period_end||""}   
+                                        value={useDateInputfier(educationInfo.period_end)||""}   
                                         name="period_end" 
                                         className="red" 
                                         type="date"

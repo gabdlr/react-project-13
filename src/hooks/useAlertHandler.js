@@ -2,11 +2,11 @@ import Swal from 'sweetalert2';
 
 function useAlertHandler (msg = "Success!", type) {
     //Watch this, TODO uniform server messages
-    console.log(msg)
-    console.log(msg instanceof Object)
-    console.log(Array.isArray(msg))
-    console.log(Object.keys(msg).length)
-    console.log(msg.length)
+    // console.log(msg)
+    // console.log(msg instanceof Object)
+    // console.log(Array.isArray(msg))
+    // console.log(Object.keys(msg).length)
+    // console.log(msg.length)
     if(type === "error"){
         //Uniform errors format on backend responses if possible
         let errorList
