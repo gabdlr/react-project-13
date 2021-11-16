@@ -6,6 +6,7 @@ import { updateSkill, deleteSkill } from '../../../../actions/profileActions';
 const SkillsEntryComponent = (props) => {
     const { _id, technology, expertise } = props;
     const [show, setShow] = useState(false);
+    const [disabledButton, setDisabledButton] = useState(true);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const SkillsEntryComponent = (props) => {
             ...skillInfo,
             [e.target.name]:e.target.value
         });
+        setDisabledButton(false);
     }
 
     const onSubmitHandler = e => {
@@ -147,6 +149,7 @@ const SkillsEntryComponent = (props) => {
                                         className="d-flex justify-content-end"
                                     >
                                         <Button
+                                        disabled={disabledButton}
                                         type="submit" 
                                         variant="outline-danger" 
                                         className="px-5" 

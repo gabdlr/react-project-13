@@ -6,6 +6,7 @@ const SkillsHeaderComponents = () => {
 
      //Bootstrap's modal
     const [show, setShow] = useState(false);
+    const [disabledButton, setDisabledButton] = useState(true);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const SkillsHeaderComponents = () => {
             ...skillInfo,
             [e.target.name]:e.target.value
         });
+        setDisabledButton(false);
     }
     const onSubmitHandler = e => {
         e.preventDefault();
@@ -127,6 +129,7 @@ const SkillsHeaderComponents = () => {
                                     className="d-flex justify-content-end"
                                 >
                                     <Button
+                                    disabled={disabledButton}
                                     type="submit" 
                                     variant="outline-danger" 
                                     className="px-5" 
