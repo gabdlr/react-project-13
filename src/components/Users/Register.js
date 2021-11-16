@@ -32,14 +32,16 @@ const Register = () => {
             });
         }
 
+        //Fact: bootstrap is not preventing the form to submit when errors
+        //thanks backend validation
         const onSubmitHandler = (e) => {
-            const form = document.getElementById('login-form');
-            e.preventDefault();
+            const form = e.currentTarget;
             if (form.checkValidity() === false) {
-            e.stopPropagation();
+              e.preventDefault();
+              e.stopPropagation();
             }
             setValidated(true);
-            fireCreateUser(user);
+            fireCreateUser(user);     
         }
     
         const dispatch = useDispatch();
@@ -61,8 +63,9 @@ const Register = () => {
         <h3 className="text-white text-center mb-4">Registration</h3>
         <Form
             id="login-form"
-            noValidate 
+            noValidate={true}
             validated={validated}
+            onSubmit={onSubmitHandler}
         >
             <fieldset>
                 <legend>
@@ -134,7 +137,7 @@ const Register = () => {
                         </Form.Label>
                         <Form.Control
                             required
-                            minLength="6"
+                            minLength={6}
                             name="password" 
                             type="password"
                             onChange={onChangeHandler} 
@@ -148,7 +151,6 @@ const Register = () => {
             </fieldset>
             <Button 
                 type="submit" 
-                onClick={onSubmitHandler} 
                 className="d-block w-100 mt-2" 
                 variant="outline-primary" 
                 size="lg"

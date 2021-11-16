@@ -20,6 +20,14 @@ function useAlertHandler (msg = "Success!", type) {
                 });
                 return;
             }
+            if(Object.keys(msg).length === 0){
+                Swal.fire({
+                    title: 'Error!',
+                    text: msg,
+                    icon: 'error',
+                });
+                return;
+            }
         }
         if(Array.isArray(msg) && msg.length === 0 ){
             errorList = msg.join('</br>');
@@ -30,7 +38,7 @@ function useAlertHandler (msg = "Success!", type) {
             });
             return;
         }
-        if (Object.keys(msg).length || msg.length > 0){
+        if (Object.keys(msg).length === 0 || msg.length > 0){
             errorList = msg.join('</br>');
             Swal.fire({
                 title: 'Error!',

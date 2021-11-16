@@ -17,7 +17,7 @@ const MainCoursesSection = () => {
             title={course.title}
             url={course.url}
             institution={course.institution}
-            date={course.date}
+            date={(course.date)}
             />)}
         </Card>
      )

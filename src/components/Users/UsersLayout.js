@@ -5,7 +5,7 @@ import './users.css';
 const UsersLayout = () => {
     return (       
         <Fragment>
-        <Navbar expand="lg" bg="dark" variant="dark" className="mb-0">
+        <Navbar expand="lg" bg="dark" variant="dark" className="navbar-shadow mb-0">
             <Container className="justify-content-center">
             <Navbar.Brand href="/">ResumeReactApp</Navbar.Brand>
             </Container>

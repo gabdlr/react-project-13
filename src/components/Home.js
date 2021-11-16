@@ -1,6 +1,5 @@
 import React, { useLayoutEffect, useEffect } from 'react'
 import { Row, Col } from "react-bootstrap";
-import { useParams } from 'react-router';
 import Header from './Header';
 //Sidebar
 import ProfilePersonalInfo from "./ViewProfile/SideBar/ProfilePersonalInfo";
@@ -20,7 +19,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { profileInfo } from '../actions/profileActions'
 import { getAuthenticatedUser } from '../actions/userActions'
 const Home = () => {
-    const params = useParams();
     const dispatch = useDispatch();
     const user = useSelector(state => state.user);
     const loading = useSelector(state => state.view.loading);
