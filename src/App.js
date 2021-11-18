@@ -38,6 +38,7 @@ function App() {
               </Protected>} 
             />
             <Route path="/Logout" element={<Logout/>}/>
+            <Route path="*" element={<Home/>}/>
           </Routes>
         </Provider>
       </Router>

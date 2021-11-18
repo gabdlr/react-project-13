@@ -15,13 +15,14 @@ const Header = (props) => {
                 <Nav>
                 {props.Home ? (<Nav.Link href="/">Home</Nav.Link>) : null }
                 {props.EditProfile ? (<Nav.Link href="/">Home</Nav.Link>) : null }
-                {props.EditProfile ? (<Nav.Link href={`/ViewProfile/${user.data._id}`}>My Profile</Nav.Link>) : null}
+                {props.EditProfile || !props.Home ? (<Nav.Link href={`/ViewProfile/${user.data._id}`}>My Profile</Nav.Link>) : null}
                 {props.EditProfile ? null : (<Nav.Link href="/Users/EditProfile">Edit Profile</Nav.Link>) }        
                 <Nav.Link href="/Logout">Logout</Nav.Link>
                 </Nav>
             ) :
             (
                 <Nav>
+                {props.Home ? (<Nav.Link href="/">Home</Nav.Link>) : null }
                 <Nav.Link href="/Users">Login</Nav.Link>
                 <Nav.Link href="/Users/Register">Sign Up</Nav.Link>
                 </Nav>

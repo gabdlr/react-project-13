@@ -1,6 +1,7 @@
-import React, { useLayoutEffect, useEffect } from 'react'
+import React, { useLayoutEffect, useEffect, Fragment } from 'react'
 import { Row, Col } from "react-bootstrap";
 import Header from './Header';
+import Footer from './Footer';
 //Sidebar
 import ProfilePersonalInfo from "./ViewProfile/SideBar/ProfilePersonalInfo";
 import ProfileStack from "./ViewProfile/SideBar/ProfileStack";
@@ -44,28 +45,31 @@ const Home = () => {
       <div>
       { loading ? (<div className="loader"></div> ) : 
         user.loading  ? <div className="loader"></div> :
-      ( <div className="container-lg container-fluid pt-5">
+      ( <Fragment>
           <Header home={true}/>
-          <Row className="mt-md-3">
-            <Col md={ 3 } className="bg-primary">
-                  <Row className="flex-column">
-                    <ProfilePersonalInfo/>
-                    <ProfileStack/>
-                    <ProfileSocial/>
-                  </Row>
-              </Col>
-              <Col md={ 9 } className="bg-secondary p-3 pt-2">
-                <NavBar/>
-                <MainAboutSection/>
-                <MainEducationSection/>
-                <MainEmploymentSection/>
-                <MainCoursesSection/>
-                <MainStackSection/>
-                <MainToolsSection/>
-                <MainHobbiesSection/>
-              </Col>
-          </Row>
-        </div>
+            <div className="container-lg pt-5">
+              <Row className="mt-md-3">
+                <Col md={ 3 } className="bg-primary">
+                      <Row className="flex-column">
+                        <ProfilePersonalInfo/>
+                        <ProfileStack/>
+                        <ProfileSocial/>
+                      </Row>
+                  </Col>
+                  <Col md={ 9 } className="bg-secondary p-3 pt-2">
+                    <NavBar/>
+                    <MainAboutSection/>
+                    <MainEducationSection/>
+                    <MainEmploymentSection/>
+                    <MainCoursesSection/>
+                    <MainStackSection/>
+                    <MainToolsSection/>
+                    <MainHobbiesSection/>
+                  </Col>
+              </Row>
+            </div>
+          <Footer/>
+        </Fragment>
       ) }   
     </div>);
 }
