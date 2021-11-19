@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { Pagination, Col } from 'react-bootstrap';
 import axiosClient from '../../config/axiosClient';
 
-export default function BsPagination() {
+export default function UsersPaginator() {
     const [ totalPages, setTotalPages ] = useState(1);
     const [ currentPage, setCurrentPage ] = useState(0);
     const [currentFirstPage, setCurrentFirstPage] = useState(0);
@@ -69,10 +69,9 @@ export default function BsPagination() {
         <Fragment>
             <div className="navbar-dark text-white pagination-results ps-4 ps-md-0">
                 <h4>More recently added Resumes</h4>
+                {/*This could be handled with sliced arrays 
+                TODO refactor in the futute */}
                 <ul className="list-unstyled">
-                    {/* {usersList[currentPage*3] ? <li><img src={usersList[currentPage*3].picture} className="pagination-pictures" alt="pic"/> {usersList[currentPage*3].name} {usersList[currentPage*3].lastname}</li> : null}
-                    {usersList[currentPage*3+1] ? <li><img src={usersList[currentPage*3+1].picture} className="pagination-pictures" alt="pic"/> {usersList[currentPage*3+1].name} {usersList[currentPage*3+1].lastname}</li> : null}
-                    {usersList[currentPage*3+2] ? <li><img src={usersList[currentPage*3+2].picture} className="pagination-pictures" alt="pic"/> {usersList[currentPage*3+2].name} {usersList[currentPage*3+2].lastname}</li> : null} */}
                     {user1 ? 
                     <li>
                         <img 

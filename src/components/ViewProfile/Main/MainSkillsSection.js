@@ -9,7 +9,7 @@ const MainSkillsSection = () => {
     const stack = useSelector( state => state.view.profile.stack);
     if (stack){
     return ( 
-        <Card id="skill" className="bg-card mt-5">
+        <Card id="stack" className="bg-card mt-5">
         <Card.Header><h2 className="my-0 text-white">Skills</h2></Card.Header>
         <Card.Body>
         {stack.map(element => 

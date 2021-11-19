@@ -46,7 +46,7 @@ const Home = () => {
       { loading ? (<div className="loader"></div> ) : 
         user.loading  ? <div className="loader"></div> :
       ( <Fragment>
-          <Header home={true}/>
+          <Header Home={false}/>
             <div className="container-lg pt-5">
               <Row className="mt-md-3">
                 <Col md={ 3 } className="bg-primary">
@@ -57,7 +57,7 @@ const Home = () => {
                       </Row>
                   </Col>
                   <Col md={ 9 } className="bg-secondary p-3 pt-2">
-                    <NavBar/>
+                    <NavBar myProfile={true}/>
                     <MainAboutSection/>
                     <MainEducationSection/>
                     <MainEmploymentSection/>

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useEffect } from 'react'
+import React, { Fragment, useLayoutEffect, useEffect } from 'react'
 import { Row, Col } from "react-bootstrap";
 import { useParams, useNavigate } from 'react-router';
 import Header from '../Header';
@@ -18,6 +18,7 @@ import MainSkillsSection from './Main/MainSkillsSection';
 import { useDispatch, useSelector } from 'react-redux';
 import { profileInfo } from '../../actions/profileActions'
 import { getAuthenticatedUser } from '../../actions/userActions'
+import Footer from '../Footer';
 const ViewProfile = () => {
     const params = useParams();
     const dispatch = useDispatch();
@@ -56,27 +57,30 @@ const ViewProfile = () => {
       <div>
       { profile.loading ? (<div className="loader"></div> ) : 
         user.loading  ? <div className="loader"></div> :
-      ( <div className="container-lg container-fluid pt-5">
+      ( <Fragment>
           <Header Home={true}/>
-          <Row className="mt-md-3">
-            <Col md={ 3 } className="bg-primary">
-                  <Row className="flex-column">
-                    <ProfilePersonalInfo/>
-                    <ProfileStack/>
-                    <ProfileSocial/>
-                  </Row>
-              </Col>
-              <Col md={ 9 } className="bg-secondary p-3 pt-2">
-                <NavBar/>
-                {profile.profile.about === "" ? null : <MainAboutSection/>}
-                {!profile.profile.education.length ? null : <MainEducationSection/>}
-                {!profile.profile.jobs.length ? null : <MainEmploymentSection/>}
-                {!profile.profile.courses.length ? null : <MainCoursesSection/>}
-                {profile.profile.hobbies === "" ? null : <MainHobbiesSection/>}
-                {!profile.profile.stack.length ? null : <MainSkillsSection/> }
-              </Col>
-          </Row>
-        </div>
+            <div className="container-lg pt-5">
+              <Row className="mt-md-3">
+                <Col md={ 3 } className="bg-primary">
+                      <Row className="flex-column">
+                        <ProfilePersonalInfo/>
+                        <ProfileStack/>
+                        <ProfileSocial/>
+                      </Row>
+                  </Col>
+                  <Col md={ 9 } className="bg-secondary p-3 pt-2">
+                    <NavBar/>
+                    {profile.profile.about === "" ? null : <MainAboutSection/>}
+                    {!profile.profile.education.length ? null : <MainEducationSection/>}
+                    {!profile.profile.jobs.length ? null : <MainEmploymentSection/>}
+                    {!profile.profile.courses.length ? null : <MainCoursesSection/>}
+                    {profile.profile.hobbies === "" ? null : <MainHobbiesSection/>}
+                    {!profile.profile.stack.length ? null : <MainSkillsSection/> }
+                  </Col>
+              </Row>
+            </div>
+          <Footer/>
+        </Fragment>
       ) }   
     </div>);
 }
