@@ -10,7 +10,10 @@ import {
     CREATE_USER,
     CREATE_USER_SUCCESS,
     CREATE_USER_FAILED,
-    USER_LOGOUT
+    USER_LOGOUT,
+    USER_CONTACT,
+    USER_CONTACT_SUCCESS,
+    USER_CONTACT_FAILED
 } from '../types';
 
 const initialState = {
@@ -29,10 +32,11 @@ export default function (state = initialState, action) {
         case USER_AUTH:
         case GET_AUTHENTICATED_USER:
         case CREATE_USER:
-            return({
+        case USER_CONTACT:    
+            return{
                 ...state,
                 loading: action.payload
-            });
+            }
         case USER_AUTH_SUCCESS:
         case CREATE_USER_SUCCESS:
             localStorage.setItem('token', action.payload);
@@ -56,7 +60,13 @@ export default function (state = initialState, action) {
                 error: action.payload,
                 loading: false
             }
+        case USER_CONTACT_SUCCESS:
+            return{
+                ...state,
+                loading:false
+            }    
         case CREATE_USER_FAILED:
+        case USER_CONTACT_FAILED:    
             return{
                 ...state,
                 error: action.payload,

@@ -1,5 +1,8 @@
 import React,{useState } from 'react';
 import { Modal, Form, Row, Col, Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { contact } from '../actions/userActions';
+
 const ContactForm = (props) => {
     const {show, setShow } = props;
     const [disabledButton, setDisabledButton] = useState(true);
@@ -8,7 +11,7 @@ const ContactForm = (props) => {
         "email": "",
         "message": ""
     });
-
+    const dispatch = useDispatch();
     const onChangeHandler = (e) => {
         setContactInfo({
             ...contactInfo,
@@ -16,8 +19,18 @@ const ContactForm = (props) => {
         });
         setDisabledButton(false);
     }
-    const handleClose = () => setShow(false);
 
+    const handleClose = () => setShow(false);
+    const onSubmitHandler =  e => {
+        e.preventDefault();
+        dispatch(contact(contactInfo));
+        setShow(false);
+        setContactInfo({
+            "name": "",
+            "email": "",
+            "message": ""
+        });
+    }
     return ( 
         <Modal 
             centered 
@@ -37,7 +50,7 @@ const ContactForm = (props) => {
                     <Col>
                         <Form 
                             className="mt-md-5 ps-md-5"
-                            // onSubmit={onSubmitHandler}
+                            onSubmit={onSubmitHandler}
                         >
                             <Form.Group 
                                 as={Row} 

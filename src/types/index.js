@@ -19,6 +19,11 @@ export const CREATE_USER_FAILED = 'CREATE_USER_FAILED';
 
 //User's actions
 
+//The orphan function
+export const USER_CONTACT = 'USER_CONTACT';
+export const USER_CONTACT_SUCCESS = 'USER_CONTACT_SUCCESS';
+export const USER_CONTACT_FAILED = 'USER_CONTACT_FAILED';
+
 //Education (omg this is going to be huge 😫)
 export const CREATE_EDUCATION = 'CREATE_EDUCATION';
 export const CREATE_EDUCATION_SUCCESS = 'CREATE_EDUCATION_SUCCESS';

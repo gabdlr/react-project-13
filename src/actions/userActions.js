@@ -8,7 +8,10 @@ import {
     CREATE_USER,
     CREATE_USER_SUCCESS,
     CREATE_USER_FAILED,
-    USER_LOGOUT
+    USER_LOGOUT,
+    USER_CONTACT,
+    USER_CONTACT_SUCCESS,
+    USER_CONTACT_FAILED
 } from '../types';
 import axiosClient from "../config/axiosClient";
 import authToken from '../config/authToken';
@@ -60,10 +63,24 @@ const createUserFailure = state => ({
     type: CREATE_USER_FAILED,
     payload: state
 });
+
 const userLogOut = () => ({
     type: USER_LOGOUT
 });
 
+//Contact
+const newContact = () => ({
+    type: USER_CONTACT,
+    payload: false
+});
+const contactSuccess = response => ({
+    type: USER_CONTACT_SUCCESS,
+    payload: response
+});
+const contactFailure = state => ({
+    type: USER_CONTACT_FAILED,
+    payload: true
+});
 //User authentication
 export function authenticate(userData) {
     return async (dispatch) => {
@@ -115,5 +132,20 @@ export function createNewUser(userData){
         dispatch(createUserFailure(true));
         //useAlertHandler(error.response.data, "error");   
        } 
+    }
+}
+
+//Contact
+export function contact(contactData){
+    return async (dispatch) => {
+        dispatch(newContact(contactData));
+        try{
+            const response = await axiosClient.post('/api/v1/contact/', contactData);
+            dispatch(contactSuccess(response.data));
+            useAlertHandler(response.data.msg, "success");
+        } catch(error){
+            dispatch(contactFailure(true));
+            useAlertHandler(error.response.data, "error");   
+        }
     }
 }
