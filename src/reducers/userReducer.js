@@ -63,7 +63,7 @@ export default function (state = initialState, action) {
         case USER_CONTACT_SUCCESS:
             return{
                 ...state,
-                loading:false
+                loading: false
             }    
         case CREATE_USER_FAILED:
         case USER_CONTACT_FAILED:    

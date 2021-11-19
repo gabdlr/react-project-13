@@ -141,11 +141,11 @@ export function contact(contactData){
         dispatch(newContact(contactData));
         try{
             const response = await axiosClient.post('/api/v1/contact/', contactData);
-            dispatch(contactSuccess(response.data));
+            dispatch(contactSuccess());
             useAlertHandler(response.data.msg, "success");
         } catch(error){
             dispatch(contactFailure(true));
-            useAlertHandler(error.response.data, "error");   
+            //useAlertHandler(error.response.data, "error");   
         }
     }
 }

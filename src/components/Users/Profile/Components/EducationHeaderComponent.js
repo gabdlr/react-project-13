@@ -127,14 +127,17 @@ const EducationHeaderComponent = () => {
                                 Status
                                 </Form.Label>
                                 <Col sm="8">
-                                <Form.Control
-                                    onChange={e => onChangeHandler(e)}
-                                    value={educationInfo.state||""}    
-                                    className="red" 
-                                    name="state" 
-                                    type="text" 
-                                    placeholder="Status" 
-                                />
+                                    <Form.Select 
+                                        className="red"
+                                        onChange={e => onChangeHandler(e)}
+                                        value={educationInfo.state||""}  
+                                        name="state" 
+                                        aria-label="Status"
+                                    >
+                                        <option value="Finished">Finished</option>
+                                        <option value="Unfinished">Unfinished</option>
+                                        <option value="On course">On course</option>
+                                    </Form.Select>
                                 </Col>
                             </Form.Group>
                             <Form.Group 

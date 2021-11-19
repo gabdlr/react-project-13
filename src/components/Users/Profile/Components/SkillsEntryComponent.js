@@ -82,7 +82,7 @@ const SkillsEntryComponent = (props) => {
                     className="bg-secondary" 
                     closeButton
                 >
-                <Modal.Title className="text-white" > New skill registry</Modal.Title>
+                <Modal.Title className="text-white" > Edit skill registry</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="bg-modal-profile" >
                     <Row className="pb-3">
@@ -154,7 +154,7 @@ const SkillsEntryComponent = (props) => {
                                         variant="outline-danger" 
                                         className="px-5" 
                                         >
-                                        Add
+                                        Save
                                         </Button>
                                     </Col>
                                 </Row>

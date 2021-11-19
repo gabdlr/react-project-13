@@ -40,7 +40,7 @@ const Home = () => {
           loadUser();
           return;
       },[dispatch]);
-
+    //Resolve the container issue in the future
     return (
       <div>
       { loading ? (<div className="loader"></div> ) : 
@@ -49,14 +49,14 @@ const Home = () => {
           <Header Home={false}/>
             <div className="container-lg pt-5">
               <Row className="mt-md-3">
-                <Col md={ 3 } className="bg-primary">
+                <Col md={4} lg={ 3 } className="bg-primary">
                       <Row className="flex-column">
                         <ProfilePersonalInfo/>
                         <ProfileStack/>
                         <ProfileSocial/>
                       </Row>
                   </Col>
-                  <Col md={ 9 } className="bg-secondary p-3 pt-2">
+                  <Col md={8} lg={ 9 } className="bg-secondary p-3 pt-2">
                     <NavBar myProfile={true}/>
                     <MainAboutSection/>
                     <MainEducationSection/>

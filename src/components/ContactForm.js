@@ -6,6 +6,7 @@ import { contact } from '../actions/userActions';
 const ContactForm = (props) => {
     const {show, setShow } = props;
     const [disabledButton, setDisabledButton] = useState(true);
+    const [validated, setValidated] = useState(false);
     const [ contactInfo, setContactInfo ] = useState({
         "name": "",
         "email": "",
@@ -22,9 +23,14 @@ const ContactForm = (props) => {
 
     const handleClose = () => setShow(false);
     const onSubmitHandler =  e => {
+        const form = e.currentTarget;
         e.preventDefault();
+        if (form.checkValidity() === false) {
+            //This actually doesn't work s, thanks backend validation
+            e.stopPropagation();
+          }
+        setValidated(true);
         dispatch(contact(contactInfo));
-        setShow(false);
         setContactInfo({
             "name": "",
             "email": "",
@@ -49,6 +55,9 @@ const ContactForm = (props) => {
                 <Row className="pb-3">
                     <Col>
                         <Form 
+                            id="contact-form"
+                            noValidate={true}
+                            validated={validated}
                             className="mt-md-5 ps-md-5"
                             onSubmit={onSubmitHandler}
                         >
@@ -65,7 +74,8 @@ const ContactForm = (props) => {
                                 Your name
                                 </Form.Label>
                                 <Col sm="8">
-                                <Form.Control 
+                                <Form.Control
+                                    required 
                                     className="red"
                                     onChange={e => onChangeHandler(e)}
                                     value={contactInfo.name||""}  
@@ -73,6 +83,9 @@ const ContactForm = (props) => {
                                     type="text" 
                                     placeholder="Your name" 
                                 />
+                                <Form.Control.Feedback type="invalid">
+                                Name can not be empty.
+                                </Form.Control.Feedback>
                                 </Col>
                             </Form.Group>
                             <Form.Group 
@@ -88,7 +101,8 @@ const ContactForm = (props) => {
                                 Your email
                                 </Form.Label>
                                 <Col sm="8">
-                                <Form.Control 
+                                <Form.Control
+                                    required 
                                     className="red"
                                     onChange={e => onChangeHandler(e)}
                                     value={contactInfo.email||""}   
@@ -96,6 +110,9 @@ const ContactForm = (props) => {
                                     type="email" 
                                     placeholder="Your email" 
                                 />
+                                <Form.Control.Feedback type="invalid">
+                                Email address is invalid.
+                                </Form.Control.Feedback>
                                 </Col>
                             </Form.Group>
                             <Form.Group 
@@ -111,12 +128,16 @@ const ContactForm = (props) => {
                                 </Form.Label>
                                 <Col sm="8">
                                 <textarea
+                                    required
                                     name="message"
                                     onChange={e => onChangeHandler(e)}
                                     value={contactInfo.message||""}                                        
                                     className="contact-textarea" 
                                     type="text"
                                 />
+                                <Form.Control.Feedback type="invalid">
+                                Message can not be empty.
+                                </Form.Control.Feedback>
                                 </Col>
                             </Form.Group>
                             
