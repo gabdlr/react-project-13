@@ -74,8 +74,8 @@ const ViewProfile = () => {
                     {!profile.profile.education.length ? null : <MainEducationSection/>}
                     {!profile.profile.jobs.length ? null : <MainEmploymentSection/>}
                     {!profile.profile.courses.length ? null : <MainCoursesSection/>}
-                    {profile.profile.hobbies === "" ? null : <MainHobbiesSection/>}
                     {!profile.profile.stack.length ? null : <MainSkillsSection/> }
+                    {profile.profile.hobbies === "" ? null : <MainHobbiesSection/>}
                   </Col>
               </Row>
             </div>
