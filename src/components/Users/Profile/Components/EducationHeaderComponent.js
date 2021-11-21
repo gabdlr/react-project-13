@@ -15,7 +15,7 @@ const EducationHeaderComponent = () => {
         "institution":"",
         "period_end": "",
         "period_start": "",
-        "state": ""
+        "state": "Finished"
     });
 
     const onChangeHandler = e => {
@@ -33,7 +33,7 @@ const EducationHeaderComponent = () => {
             "institution":"",
             "period_end": "",
             "period_start": "",
-            "state": "Finished"
+            "state": ""
         }
         );
         handleClose();
