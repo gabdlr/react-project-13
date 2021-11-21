@@ -31,15 +31,17 @@ export default function UsersPaginator() {
         if(totalPages < 3){
             setCurrentLastPage(totalPages-1);
         }
-        if((currentPage < 2 && totalPages >= 3) || currentPage === 2){
+        if((currentPage <= 2 && totalPages >= 3)){
             setCurrentFirstPage(0);
-            setCurrentLastPage(3);
+            setCurrentLastPage(2);
         }
-        if(currentPage > 2 && totalPages + 1 > currentPage + 2){
+        if(currentPage > 2 && totalPages > currentPage + 2){
+            console.log("b")
             setCurrentLastPage(currentPage+2)
             setCurrentFirstPage(currentPage)
         }
-        if(currentPage > 2 && totalPages + 1 < currentPage + 2){
+        if(currentPage > 2 && totalPages < currentPage + 2){
+            console.log("a")
             setCurrentLastPage(totalPages)
             setCurrentFirstPage(currentPage)
         }
@@ -54,17 +56,22 @@ export default function UsersPaginator() {
     const goToPage = (page) => {setCurrentPage((page))};
 
     const goFirstPage = () => { if (currentPage === 0) return;
-                                    setCurrentPage(0) };
+                                    setCurrentPage(0) }
 
-    const goLastPage = () => {  if (currentPage === totalPages)  return; 
-                                    setCurrentPage(parseInt(totalPages - 1))};
+    const goLastPage = () => {  if (currentPage === totalPages)  return;
+                                    setCurrentPage(totalPages - 1)}
 
     const goToNextPage = () => { if (currentPage === totalPages - 1) return;
-                                    setCurrentPage(currentPage + 1)};
+                                    setCurrentPage(currentPage + 1)
+                                }
 
     const goToPrevPage = () => {if (currentPage === 0) return;
-                                    setCurrentPage(currentPage - 1)};
-
+                                    setCurrentPage(currentPage - 1)}
+    
+    const ellipsis = () => {     goToPage(currentLastPage+1); }
+                                console.log(currentFirstPage)
+                                console.log(currentPage)
+                                console.log(currentLastPage)
     return(
         <Fragment>
             <div className="navbar-dark text-white pagination-results ps-4 ps-md-0">
@@ -117,23 +124,25 @@ export default function UsersPaginator() {
                     onClick={() => goToPage(currentFirstPage)}
                 >{currentFirstPage+1}
                 </Pagination.Item> 
-                
-                <Pagination.Item 
-                    active={currentPage===currentFirstPage+1}
-                    onClick={() => goToPage(currentFirstPage+1)}
-                >{currentFirstPage+2}
-                </Pagination.Item>
 
-                {currentFirstPage+1 === currentLastPage || currentFirstPage+2 === currentLastPage ? null : 
+                {currentFirstPage+1 < currentLastPage ? 
+                <Pagination.Item 
+                active={currentPage===currentFirstPage+1}
+                onClick={() => goToPage(currentFirstPage+1)}
+                >{currentFirstPage+2}
+                </Pagination.Item> : null} 
+                
+
+                {currentFirstPage+1 >= currentLastPage ? null : 
                 <Pagination.Item
-                    active={currentPage===currentLastPage-1} 
-                    onClick={() => goToPage(currentLastPage-1)}
-                >{currentLastPage}
+                    active={currentPage===currentLastPage} 
+                    onClick={() => goToPage(currentLastPage)}
+                >{currentFirstPage+3}
                 </Pagination.Item>}
 
-                { totalPages > currentLastPage + 1  ? 
+                { totalPages >= currentLastPage + 1  ? 
                 <Pagination.Ellipsis
-                    onClick={() => goToPage(currentLastPage)}
+                    onClick={() => ellipsis()}
                 /> 
                 : null}
 
