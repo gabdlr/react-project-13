@@ -36,12 +36,10 @@ export default function UsersPaginator() {
             setCurrentLastPage(2);
         }
         if(currentPage > 2 && totalPages > currentPage + 2){
-            console.log("b")
             setCurrentLastPage(currentPage+2)
             setCurrentFirstPage(currentPage)
         }
         if(currentPage > 2 && totalPages < currentPage + 2){
-            console.log("a")
             setCurrentLastPage(totalPages)
             setCurrentFirstPage(currentPage)
         }
@@ -69,9 +67,7 @@ export default function UsersPaginator() {
                                     setCurrentPage(currentPage - 1)}
     
     const ellipsis = () => {     goToPage(currentLastPage+1); }
-                                console.log(currentFirstPage)
-                                console.log(currentPage)
-                                console.log(currentLastPage)
+
     return(
         <Fragment>
             <div className="navbar-dark text-white pagination-results ps-4 ps-md-0">
