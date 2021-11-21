@@ -33,7 +33,7 @@ const EducationHeaderComponent = () => {
             "institution":"",
             "period_end": "",
             "period_start": "",
-            "state": ""
+            "state": "Finished"
         }
         );
         handleClose();
