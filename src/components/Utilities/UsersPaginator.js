@@ -31,17 +31,21 @@ export default function UsersPaginator() {
         if(totalPages < 3){
             setCurrentLastPage(totalPages-1);
         }
-        if((currentPage <= 2 && totalPages >= 3)){
+        if((totalPages > currentPage + 2)){
             setCurrentFirstPage(0);
             setCurrentLastPage(2);
         }
-        if(currentPage > 2 && totalPages > currentPage + 2){
-            setCurrentLastPage(currentPage+2)
-            setCurrentFirstPage(currentPage)
+        if(totalPages === currentPage + 1){
+            setCurrentLastPage(currentPage+1);
+            setCurrentFirstPage(currentPage-1);
         }
-        if(currentPage > 2 && totalPages < currentPage + 2){
-            setCurrentLastPage(totalPages)
-            setCurrentFirstPage(currentPage)
+        if(totalPages === currentPage + 2){
+            setCurrentLastPage(currentPage+2);
+            setCurrentFirstPage(currentPage);
+        }
+        if (totalPages < currentPage + 1){
+            setCurrentLastPage(currentPage+1);
+            setCurrentFirstPage(currentPage);
         }
     }, [usersList, currentPage, totalPages, currentFirstPage, currentLastPage]);
 
@@ -65,9 +69,6 @@ export default function UsersPaginator() {
 
     const goToPrevPage = () => {if (currentPage === 0) return;
                                     setCurrentPage(currentPage - 1)}
-    
-    const ellipsis = () => {     goToPage(currentLastPage+1); }
-
     return(
         <Fragment>
             <div className="navbar-dark text-white pagination-results ps-4 ps-md-0">
@@ -129,7 +130,7 @@ export default function UsersPaginator() {
                 </Pagination.Item> : null} 
                 
 
-                {currentFirstPage+1 >= currentLastPage ? null : 
+                {currentFirstPage+2 > currentLastPage || currentLastPage === totalPages? null : 
                 <Pagination.Item
                     active={currentPage===currentLastPage} 
                     onClick={() => goToPage(currentLastPage)}
@@ -138,7 +139,6 @@ export default function UsersPaginator() {
 
                 { totalPages >= currentLastPage + 1  ? 
                 <Pagination.Ellipsis
-                    onClick={() => ellipsis()}
                 /> 
                 : null}
 

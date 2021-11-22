@@ -145,7 +145,7 @@ export function contact(contactData){
             useAlertHandler(response.data.msg, "success");
         } catch(error){
             dispatch(contactFailure(true));
-            //useAlertHandler(error.response.data, "error");   
+            useAlertHandler(error.response.data, "error");   
         }
     }
 }

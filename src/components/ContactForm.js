@@ -31,11 +31,7 @@ const ContactForm = (props) => {
           }
         setValidated(true);
         dispatch(contact(contactInfo));
-        setContactInfo({
-            "name": "",
-            "email": "",
-            "message": ""
-        });
+        handleClose();
     }
     return ( 
         <Modal 
