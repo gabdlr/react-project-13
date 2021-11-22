@@ -26,12 +26,12 @@ const ContactForm = (props) => {
         const form = e.currentTarget;
         e.preventDefault();
         if (form.checkValidity() === false) {
-            //This actually doesn't work s, thanks backend validation
+            //This actually doesn't works, thanks backend validation
             e.stopPropagation();
           }
         setValidated(true);
-        dispatch(contact(contactInfo));
         handleClose();
+        dispatch(contact(contactInfo));
     }
     return ( 
         <Modal 
