@@ -3,10 +3,15 @@ import { Pagination } from 'react-bootstrap';
 import axiosClient from '../../config/axiosClient';
 
 export default function UsersPaginator() {
-    const [ totalPages, setTotalPages ] = useState(1);
-    const [ currentPage, setCurrentPage ] = useState(0);
-    const [currentFirstPage, setCurrentFirstPage] = useState(0);
-    const [ currentLastPage, setCurrentLastPage ] = useState(0);
+    //TODO use redux for handling the component's state to keep current pages after loading a profile
+    const [ paginator, setPaginator ] = useState({
+         totalPages: 1,
+         currentPage: 1,
+         firstPage: 1,
+         secondPage: 2,
+         thirdPage: 3
+    })
+
     const [ loading, setLoading] = useState(true)
     const [ usersList, setUsersList ] = useState([]);
 
@@ -18,57 +23,132 @@ export default function UsersPaginator() {
             setUsersList(response.data);
         }
         getUsersList();
-
         return () => {
             setLoading(false)
         }
     }
     }, [usersList, loading]);
-
+   
     useEffect(() => {
-        const pages = Math.ceil(usersList.length/3);
-        setTotalPages(pages)
-        if(totalPages < 3){
-            setCurrentLastPage(totalPages-1);
-        }
-        if((totalPages > currentPage + 2)){
-            setCurrentFirstPage(0);
-            setCurrentLastPage(2);
-        }
-        if(totalPages === currentPage + 1){
-            setCurrentLastPage(currentPage+1);
-            setCurrentFirstPage(currentPage-1);
-        }
-        if(totalPages === currentPage + 2){
-            setCurrentLastPage(currentPage+2);
-            setCurrentFirstPage(currentPage);
-        }
-        if (totalPages < currentPage + 1){
-            setCurrentLastPage(currentPage+1);
-            setCurrentFirstPage(currentPage);
-        }
-    }, [usersList, currentPage, totalPages, currentFirstPage, currentLastPage]);
+        let pages = Math.ceil(usersList.length/3);
+
+        setPaginator({
+            ...paginator,
+            totalPages: pages
+        });
+    }, [usersList, setPaginator]);
 
     //Aliases for user on usersList (as it is disgusting to handle)
-    let user1 = usersList[currentPage*3];
-    let user2 = usersList[currentPage*3+1];
-    let user3 = usersList[currentPage*3+2];
+    let user1 = usersList[(paginator.currentPage - 1) * 3] ;
+    let user2 = usersList[(paginator.currentPage - 1) * 3+1];
+    let user3 = usersList[(paginator.currentPage - 1) * 3+2];
 
-    //Navigation
-    const goToPage = (page) => {setCurrentPage((page))};
+    const paginatorNextPage = () => {
+        if(paginator.currentPage + 1 > paginator.totalPages) return;
+        if(paginator.currentPage + 1 > paginator.thirdPage) {
+            setPaginator({
+                ...paginator,
+                currentPage:(paginator.currentPage + 1),
+                firstPage:  (paginator.currentPage + 1),
+                secondPage: (paginator.currentPage + 2),
+                thirdPage:  (paginator.currentPage + 3)
+            });
+        } else {
+            setPaginator({
+                ...paginator,
+                //I know parentheses is not required, just looks cleaner to me
+                currentPage: (paginator.currentPage + 1)
+            });
+        }
+    }
 
-    const goFirstPage = () => { if (currentPage === 0) return;
-                                    setCurrentPage(0) }
+    const paginatorPreviousPage = () => {
+        if(paginator.currentPage - 1 < 1) return;
+        if(paginator.currentPage - 1 < paginator.firstPage) {
+            if(paginator.currentPage - 3 < 1) {
+                setPaginator({
+                    ...paginator,
+                    currentPage:(paginator.currentPage - 1),
+                    firstPage:  (1),
+                    secondPage: (2),
+                    thirdPage:  (3)
+                });
+            } else {
+                setPaginator({
+                    ...paginator,
+                    currentPage:(paginator.currentPage - 1),
+                    firstPage:  (paginator.currentPage - 3),
+                    secondPage: (paginator.currentPage - 2),
+                    thirdPage:  (paginator.currentPage - 1)
+                });
+            }
+        } else {
+            setPaginator({
+                ...paginator,
+                //I know parentheses is not required, just looks cleaner to me
+                currentPage: (paginator.currentPage - 1)
+            });
+        }
+    }
 
-    const goLastPage = () => {  if (currentPage === totalPages)  return;
-                                    setCurrentPage(totalPages - 1)}
+    const paginatorLastPage = () => {
+        if(paginator.firstPage === paginator.totalPages 
+            || paginator.secondPage === paginator.totalPages 
+            || paginator.thirdPage === paginator.totalPages) {
+                setPaginator({
+                    ...paginator,
+                    currentPage:(paginator.totalPages)
+                }); 
+            } else {
+                setPaginator({
+                    ...paginator,
+                    currentPage:(paginator.totalPages),
+                    firstPage:  (paginator.totalPages),
+                    secondPage: (paginator.totalPages + 1),
+                    thirdPage:  (paginator.totalPages + 2)
+                });
+            }
+    }
 
-    const goToNextPage = () => { if (currentPage === totalPages - 1) return;
-                                    setCurrentPage(currentPage + 1)
-                                }
+    const paginatorFirstPage = () => {
+        setPaginator({
+            ...paginator,
+            currentPage:(1),
+            firstPage:  (1),
+            secondPage: (2),
+            thirdPage:  (3)
+        });
+    }
 
-    const goToPrevPage = () => {if (currentPage === 0) return;
-                                    setCurrentPage(currentPage - 1)}
+    const paginatorPages = (page) => {
+        if(page === paginator.currentPage) return;
+        if(page === 1){
+            setPaginator({
+                ...paginator,
+                currentPage: paginator.firstPage,
+            });
+        } else if (page === 2) {
+            setPaginator({
+                ...paginator,
+                currentPage: paginator.secondPage,
+            });
+        } else if (page === 3) {
+            setPaginator({
+                ...paginator,
+                currentPage: paginator.thirdPage,
+            }); 
+        }
+    }
+
+    const paginatorEllipsis = () => {
+        setPaginator({
+            ...paginator,
+            currentPage:(paginator.thirdPage + 1),
+            firstPage:  (paginator.thirdPage + 1),
+            secondPage: (paginator.thirdPage + 2),
+            thirdPage:  (paginator.thirdPage + 3)
+        });
+    }
     return(
         <Fragment>
             <div className="navbar-dark text-white pagination-results ps-4 ps-md-0">
@@ -110,43 +190,42 @@ export default function UsersPaginator() {
             </div>
             <Pagination className="footer justify-content-center justify-content-md-start">
                 <Pagination.First 
-                    onClick={ goFirstPage }
+                    onClick={ paginatorFirstPage }
                 />
                 <Pagination.Prev 
-                    onClick={ goToPrevPage }
+                    onClick = { paginatorPreviousPage }
                 />
                 
                 <Pagination.Item 
-                    active={currentPage===currentFirstPage}
-                    onClick={() => goToPage(currentFirstPage)}
-                >{currentFirstPage+1}
+                    active={paginator.currentPage===paginator.firstPage}
+                    onClick={() => paginatorPages(1) }
+                >{paginator.firstPage}
                 </Pagination.Item> 
 
-                {currentFirstPage+1 < currentLastPage ? 
-                <Pagination.Item 
-                active={currentPage===currentFirstPage+1}
-                onClick={() => goToPage(currentFirstPage+1)}
-                >{currentFirstPage+2}
-                </Pagination.Item> : null} 
+                { paginator.secondPage <= paginator.totalPages ?
+                (<Pagination.Item 
+                    active={paginator.currentPage===paginator.secondPage}
+                    onClick={() => paginatorPages(2) }
+                >{paginator.secondPage}
+                </Pagination.Item> ) : null }
                 
+                { paginator.thirdPage <= paginator.totalPages ?
+                (<Pagination.Item
+                    active={paginator.currentPage===paginator.thirdPage} 
+                    onClick={() => paginatorPages(3) }
+                >{paginator.thirdPage}
+                </Pagination.Item>) : null }
 
-                {currentFirstPage+2 > currentLastPage || currentLastPage === totalPages? null : 
-                <Pagination.Item
-                    active={currentPage===currentLastPage} 
-                    onClick={() => goToPage(currentLastPage)}
-                >{currentFirstPage+3}
-                </Pagination.Item>}
-
-                { totalPages >= currentLastPage + 1  ? 
-                <Pagination.Ellipsis
-                /> 
-                : null}
+                { paginator.totalPages > paginator.thirdPage ?
+                (<Pagination.Ellipsis
+                    onClick={paginatorEllipsis}
+                /> ) : null }
 
                 <Pagination.Next
-                    onClick={ goToNextPage }
+                    onClick = {  paginatorNextPage }
                 />
                 <Pagination.Last 
-                onClick={ goLastPage }
+                    onClick = { paginatorLastPage }
                 />
             </Pagination>
         </Fragment>
