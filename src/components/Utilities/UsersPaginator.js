@@ -6,10 +6,10 @@ export default function UsersPaginator() {
     //TODO use redux for handling the component's state to keep current pages after loading a profile
     const [ paginator, setPaginator ] = useState({
          totalPages: 1,
-         currentPage: 1,
-         firstPage: 1,
-         secondPage: 2,
-         thirdPage: 3
+         currentPage: sessionStorage.getItem('currentPage') ? parseInt(sessionStorage.getItem('currentPage')) : 1,
+         firstPage: sessionStorage.getItem('currentPage') ? parseInt(sessionStorage.getItem('currentPage')) : 1,
+         secondPage: sessionStorage.getItem('currentPage') ? parseInt(sessionStorage.getItem('currentPage')) + 1 : 2,
+         thirdPage: sessionStorage.getItem('currentPage') ? parseInt(sessionStorage.getItem('currentPage')) + 2 : 3
     })
 
     const [ loading, setLoading] = useState(true)
@@ -60,6 +60,7 @@ export default function UsersPaginator() {
                 currentPage: (paginator.currentPage + 1)
             });
         }
+        sessionStorage.setItem('currentPage', paginator.currentPage + 1);
     }
 
     const paginatorPreviousPage = () => {
@@ -89,12 +90,14 @@ export default function UsersPaginator() {
                 currentPage: (paginator.currentPage - 1)
             });
         }
+        sessionStorage.setItem('currentPage', paginator.currentPage - 1)
     }
 
     const paginatorLastPage = () => {
         if(paginator.firstPage === paginator.totalPages 
-            || paginator.secondPage === paginator.totalPages 
-            || paginator.thirdPage === paginator.totalPages) {
+        || paginator.secondPage === paginator.totalPages 
+        || paginator.thirdPage === paginator.totalPages) 
+            {
                 setPaginator({
                     ...paginator,
                     currentPage:(paginator.totalPages)
@@ -104,10 +107,12 @@ export default function UsersPaginator() {
                     ...paginator,
                     currentPage:(paginator.totalPages),
                     firstPage:  (paginator.totalPages),
+                    //This is not a mistake is just to make them invisible
                     secondPage: (paginator.totalPages + 1),
                     thirdPage:  (paginator.totalPages + 2)
                 });
             }
+            sessionStorage.setItem('currentPage', paginator.totalPages);
     }
 
     const paginatorFirstPage = () => {
@@ -118,25 +123,29 @@ export default function UsersPaginator() {
             secondPage: (2),
             thirdPage:  (3)
         });
+        sessionStorage.setItem('currentPage', 1);
     }
 
     const paginatorPages = (page) => {
-        if(page === paginator.currentPage) return;
+ 
         if(page === 1){
             setPaginator({
                 ...paginator,
                 currentPage: paginator.firstPage,
             });
+            sessionStorage.setItem('currentPage', paginator.firstPage);
         } else if (page === 2) {
             setPaginator({
                 ...paginator,
                 currentPage: paginator.secondPage,
             });
+            sessionStorage.setItem('currentPage', paginator.secondPage);
         } else if (page === 3) {
             setPaginator({
                 ...paginator,
                 currentPage: paginator.thirdPage,
-            }); 
+            });
+            sessionStorage.setItem('currentPage', paginator.thirdPage); 
         }
     }
 
@@ -148,6 +157,7 @@ export default function UsersPaginator() {
             secondPage: (paginator.thirdPage + 2),
             thirdPage:  (paginator.thirdPage + 3)
         });
+        sessionStorage.setItem('currentPage', paginator.thirdPage + 1);
     }
     return(
         <Fragment>
